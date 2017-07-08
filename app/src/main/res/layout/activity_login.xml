@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingLeft="10dp"
+android:paddingRight="10dp"
+tools:context="com.example.emiliano.appturnos.LoginActivity">
+
+<TextView
+    android:id="@+id/labelUsername"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:textStyle="bold"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="39dp"
+    android:textSize="24sp"
+    android:text="Usuario:" />
+
+<EditText
+    android:id="@+id/etUsername"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/labelUsername"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp"
+    android:height="24dp"
+    android:background="@drawable/borde_negro"
+    android:inputType="textPersonName"
+    android:padding="15dp"
+    android:selectAllOnFocus="false"
+    android:singleLine="false"
+    android:textSize="20sp" />
+
+<TextView
+    android:id="@+id/labelPwd"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/etUsername"
+    android:layout_marginTop="30dp"
+    android:textStyle="bold"
+    android:textSize="24sp"
+    android:text="Contraseña:" />
+
+<EditText
+    android:id="@+id/etPassword"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/labelPwd"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/borde_negro"
+    android:padding="15dp"
+    android:height="24dp"
+    android:inputType="textPassword"
+    android:textSize="24sp" />
+
+<Button
+    android:id="@+id/btnIngresar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/colorWhite"
+    android:layout_marginBottom="20dp"
+    android:onClick="onIngresar"
+    android:text="Ingresar"
+    android:padding="15dp"
+    android:textSize="24sp" />
+
+<TextView
+    android:id="@+id/tvMsgLogin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/btnLogin"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="58dp"
+    android:text=""
+    android:textSize="24sp" />
+
+
+
+</RelativeLayout>
