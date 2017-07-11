@@ -47,22 +47,21 @@ public class APITurnosManager {
                 php -S 192.168.0.61:8080
       */
     //public String endpoint_pacientes="http://192.168.0.61:8080/api/pacientes/1";
-    public String base = "http://192.168.0.67:8080/api";
+    public String base = "http://192.168.0.70:8080/api";
     private final String EP_PACIENTES = base + "/pacientes";
     private final String EP_LOGIN = base + "/login";
 
     private RequestQueue requestQueue;
-    private Context context;
     private Usuario usuario;
     private String ultimoError;
 
-    public APITurnosManager(Context context) {
+    public APITurnosManager(RequestQueue requestQueue) {
 
         //Inicializacion de variables:
-        //contexto:
-        this.context = context;
+
         //cola de request HTTP (gestionada por Volley):
-        this.requestQueue = Volley.newRequestQueue(this.context);
+        this.requestQueue = requestQueue;
+
         //Ultimos error:
         this.ultimoError = new String();
 
@@ -94,13 +93,11 @@ public class APITurnosManager {
                     @Override
                     public void onResponse(JSONObject response) {
 
+                        Log.i("SSSDSD", "s");
                             Gson gson = new Gson();
 
                             usuario = gson.fromJson(response.toString(), Usuario.class);
-                            Bundle data = new Bundle();
-                            data.putSerializable("usuario", usuario);
-                            callback.setData(data);
-                            callback.successAction();
+                            callback.successAction(usuario);
 
                             Log.i("USUARIO: ", response.toString());
 
@@ -112,12 +109,10 @@ public class APITurnosManager {
                     public void onErrorResponse(VolleyError error) {
                         switch (error.networkResponse.statusCode){
                             case 401: //unauthorized
-                                Toast.makeText(callback.getContext(), "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                                callback.showToast("Usuario y/o contraseña incorrectos");
                                 break;
                             default:
-                                Toast.makeText(callback.getContext(),
-                                        "Ocurrio un error desde la API. HTTTP Code: " + error.networkResponse.statusCode,
-                                        Toast.LENGTH_LONG).show();
+                                callback.showToast("Ocurrio un error desde la API. HTTTP Code: " + error.networkResponse.statusCode);
                                 ultimoError = error.toString();
                                 Log.e("LOGIN ERROR:", error.toString());
                         }

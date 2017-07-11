@@ -2,6 +2,7 @@ package com.example.emiliano.appturnos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 /**
  * Created by emiliano on 07/07/17.
@@ -20,9 +21,9 @@ public class OnFinishCallback {
     }
 
     /**
-     * Actualiza la vista
+     * Actualiza la vista. Si esta funcion hace uso de "data", se debe setear previamente el bundle con el metodo setData
      */
-    public void successAction(){
+    public void successAction(Object data){
         return;
     }
 
@@ -47,5 +48,9 @@ public class OnFinishCallback {
 
     public void setData(Bundle data) {
         this.data = data;
+    }
+
+    public void showToast(String msg){
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 }

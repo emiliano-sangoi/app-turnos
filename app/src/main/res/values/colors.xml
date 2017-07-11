@@ -6,4 +6,16 @@
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#FFF</color>
     <color name="colorGray">#ccc</color>
+    
+    <color name="colorMarine">#57BC90</color>
+    <color name="colorForest">#015249</color>
+
+
+    <color name="prussianBlue">#0B3C5D</color>
+    <color name="skyBlue">#328CC1</color>
+    <color name="goldLeaf">#D9B310</color>
+    <color name="ivoryBlack">#1D2731</color>
+    <color name="colorCoral">#FF533D</color>
+
+
 </resources>

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 public class HomeActivity extends AppCompatActivity {
 
 private TextView txtView;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +31,29 @@ private TextView txtView;
 
         //Recuperar el usuario:
         Intent i = getIntent();
-        Usuario usuario = (Usuario) i.getExtras().getSerializable("usuario");
+        usuario = (Usuario) i.getExtras().getSerializable("usuario");
         usuario.setLogueado(true);
 
         //Componentes visuales:
-        this.txtView = (TextView) findViewById(R.id.txtMsg);
-        this.txtView.setText(usuario.getNombres() + ", " + usuario.getApellidos());
-
+        //this.txtView = (TextView) findViewById(R.id.txtMsg);
+        //this.txtView.setText(usuario.getNombres() + ", " + usuario.getApellidos());
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.main_menu_item_salir:
+                usuario.setLogueado(false);
+                startActivity( new Intent(this, LoginActivity.class) );
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

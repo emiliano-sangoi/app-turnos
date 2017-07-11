@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class LoginActivity extends Activity {
 
     private APITurnosManager apiTurnos;
@@ -21,7 +24,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        this.apiTurnos = new APITurnosManager(getApplicationContext());
+        RequestQueue rq = Volley.newRequestQueue(this);
+        this.apiTurnos = new APITurnosManager(rq);
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -38,10 +42,14 @@ public class LoginActivity extends Activity {
         OnFinishCallback callback = new OnFinishCallback(this){
 
             @Override
-            public void successAction() {
+            public void successAction(Object data) {
 
                 Intent i = new Intent(this.getContext(), HomeActivity.class);
-                i.putExtras(getData());
+                Usuario usuario = (Usuario) data;
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("usuario", usuario);
+
+                i.putExtras(bundle);
 
                 startActivity(i);
 
