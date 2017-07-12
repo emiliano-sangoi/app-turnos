@@ -31,7 +31,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:inputType="textPersonName"
     android:padding="15dp"
     android:selectAllOnFocus="false"
-    android:singleLine="false"
+    android:text="@string/user_ej"
     android:textSize="20sp" />
 
 <TextView
@@ -54,6 +54,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:padding="15dp"
     android:height="24dp"
     android:inputType="textPassword"
+    android:text="@string/pwd_user_ej"
     android:textSize="24sp" />
 
 <Button
@@ -74,7 +75,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:id="@+id/tvMsgLogin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/btnLogin"
+    android:layout_below="@+id/btnIngresar"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="58dp"
     android:text=""

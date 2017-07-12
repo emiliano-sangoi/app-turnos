@@ -34,6 +34,7 @@
     </ScrollView>
 
     <TextView
+        android:id="@+id/txtMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22dp"
@@ -60,7 +61,7 @@
                 android:background="@color/colorPrimary"
                 android:text="Más Info"
                 android:textColor="@color/colorWhite"
-                android:textSize="24dp" />
+                android:textSize="20dp" />
 
 
             <Button
@@ -73,7 +74,7 @@
                 android:background="@color/colorCoral"
                 android:text="Dar de Baja"
                 android:textColor="@color/colorWhite"
-                android:textSize="24dp"
+                android:textSize="20dp"
 
 
                 />
@@ -93,7 +94,8 @@
         android:background="@color/colorPrimary"
         android:text="Nuevo Turno"
         android:textColor="@color/colorWhite"
-        android:textSize="24dp" />
+        android:onClick="onNuevoTurnoClick"
+        android:textSize="20dp" />
 
 
 </RelativeLayout>

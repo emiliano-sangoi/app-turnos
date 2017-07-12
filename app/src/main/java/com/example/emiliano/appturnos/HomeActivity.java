@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -21,8 +22,10 @@ import com.android.volley.toolbox.Volley;
 
 public class HomeActivity extends AppCompatActivity {
 
-private TextView txtView;
     private Usuario usuario;
+    private ScrollView misTurnosContainer;
+    private TextView txtView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +34,34 @@ private TextView txtView;
 
         //Recuperar el usuario:
         Intent i = getIntent();
-        usuario = (Usuario) i.getExtras().getSerializable("usuario");
-        usuario.setLogueado(true);
+        Bundle b = i.getExtras();
+
+        if( i.getExtras().getSerializable("usuario") != null) {
+            usuario = (Usuario) i.getExtras().getSerializable("usuario");
+
+            //cambiar su estado a logueado:
+            usuario.setLogueado(true);
+        }
+
+
 
         //Componentes visuales:
-        //this.txtView = (TextView) findViewById(R.id.txtMsg);
+        this.misTurnosContainer = (ScrollView) findViewById(R.id.misTurnosContainer);
+        this.txtView = (TextView) findViewById(R.id.txtMsg);
         //this.txtView.setText(usuario.getNombres() + ", " + usuario.getApellidos());
 
     }
+
+    public void onNuevoTurnoClick(View view){
+
+        Intent i = new Intent(this, NuevoTurnoWizard1Activity.class);
+        Bundle data = new Bundle();
+        data.putSerializable("usuario", this.usuario);
+        i.putExtras(data);
+        startActivity(i);
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,5 +78,10 @@ private TextView txtView;
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 }

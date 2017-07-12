@@ -50,6 +50,7 @@ public class APITurnosManager {
     public String base = "http://192.168.0.70:8080/api";
     private final String EP_PACIENTES = base + "/pacientes";
     private final String EP_LOGIN = base + "/login";
+    private final String EP_OBRAS_SOCIALES = base + "/os";
 
     private RequestQueue requestQueue;
     private Usuario usuario;
@@ -93,7 +94,6 @@ public class APITurnosManager {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        Log.i("SSSDSD", "s");
                             Gson gson = new Gson();
 
                             usuario = gson.fromJson(response.toString(), Usuario.class);
@@ -127,6 +127,48 @@ public class APITurnosManager {
 
 
         //Log.i("HTTP METHOD", "" + request.getErrorListener()..getMethod());
+
+        this.requestQueue.add(request);
+
+    }
+
+
+    public void getAfiliaciones(final OnFinishCallback callback, int id_paciente){
+
+        String url = new String( EP_OBRAS_SOCIALES + "/afiliaciones/paciente/" + id_paciente);
+        StringRequest request = new StringRequest(Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    /**
+                     * Called when a response is received.
+                     *
+                     * @param response
+                     */
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        Afiliacion[] afiliaciones = gson.fromJson(response.toString(), Afiliacion[].class);
+
+                        Log.i("AFILIACION", "" + afiliaciones.length);
+
+                        callback.successAction(afiliaciones);
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    /**
+                     * Callback method that an error has been occurred with the
+                     * provided error code and optional user-readable message.
+                     *
+                     * @param error
+                     */
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
 
         this.requestQueue.add(request);
 

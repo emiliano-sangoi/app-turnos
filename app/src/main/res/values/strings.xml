@@ -3,4 +3,12 @@
     <string name="app_name">AppTurnos</string>
     <string name="main_menu_item_salir_label">Salir</string>
     <string name="home_no_existen_turnos">No existen turnos cargados.</string>
+    <string name="user_ej">emil34</string>
+    <string name="pwd_user_ej">917</string>
+    <string name="w_nuevo_turno_tit">Nuevo Turno</string>
+    <string name="w1_txt_desc">Seleccione la obra social con la que realizara la consulta medica. Es posible que el sanatorio no tenga convenio con esa obra social, por lo que no podrá realizar la consulta a menos que abone el monto correspondiente a la misma.</string>
+
+
+    <!--Buttons:-->
+    <string name="txtBtnCancel">Cancelar</string>
 </resources>

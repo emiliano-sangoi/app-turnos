@@ -21,9 +21,18 @@ public class OnFinishCallback {
     }
 
     /**
-     * Actualiza la vista. Si esta funcion hace uso de "data", se debe setear previamente el bundle con el metodo setData
+     * Actualiza la vista. En data se encuentra el objeto con los datos, normalmente traidos del modelo.
+     * @param data
      */
     public void successAction(Object data){
+        return;
+    }
+
+    /**
+     *
+     * @param data
+     */
+    public void successAction(Object[] data){
         return;
     }
 

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context="com.example.emiliano.appturnos.NuevoTurnoWizard1Activity">
+
+    <TextView
+        android:id="@+id/w1TxtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/w_nuevo_turno_tit"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/w1TxtSubTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/w1TxtTitulo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Paso 1: Selección Obra Social"
+        android:textColor="@color/colorForest"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/w1TxtDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/w1TxtSubTitulo"
+        android:layout_marginTop="15dp"
+        android:text="@string/w1_txt_desc"
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/w1Txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/w1TxtDesc"
+        android:layout_marginTop="20dp"
+        android:text="Obras sociales disponibles:"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+
+    <Spinner
+        android:id="@+id/w1SpinnerAfiliaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/w1TxtSubTitulo"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/colorBlack"
+        android:spinnerMode="dialog" />
+
+
+    <CheckBox
+        android:id="@+id/w1CKBoxPagarConsulta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/w1SpinnerAfiliaciones"
+        android:layout_marginTop="36dp"
+        android:text="Pagar consulta"
+        android:textSize="22dp" />
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TableRow android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/w1BtnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:background="@color/colorCoral"
+                android:text="@string/txtBtnCancel"
+                android:onClick="onW1BtnCancelar"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/w1BtnSig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="Siguiente"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</RelativeLayout>
