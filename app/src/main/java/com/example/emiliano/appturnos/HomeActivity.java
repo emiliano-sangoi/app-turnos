@@ -1,5 +1,6 @@
 package com.example.emiliano.appturnos;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -22,9 +24,17 @@ import com.android.volley.toolbox.Volley;
 
 public class HomeActivity extends AppCompatActivity {
 
+    /**
+     * Usuario logueado
+     */
     private Usuario usuario;
+
+    //Componentes visuales:
     private ScrollView misTurnosContainer;
     private TextView txtView;
+
+    //Constantes
+    private final int REQ_NUEVO_TURNO = 8;
 
 
     @Override
@@ -58,9 +68,23 @@ public class HomeActivity extends AppCompatActivity {
         Bundle data = new Bundle();
         data.putSerializable("usuario", this.usuario);
         i.putExtras(data);
-        startActivity(i);
+        startActivityForResult(i, REQ_NUEVO_TURNO);
 
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode){
+            case Activity.RESULT_OK:
+                Toast.makeText(this, "Turno creado correctamente!!!", Toast.LENGTH_LONG).show();
+
+            case Activity.RESULT_CANCELED:
+                Toast.makeText(this, "La creacion del turno ha sido cancelada.", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
 
     @Override

@@ -47,10 +47,11 @@ public class APITurnosManager {
                 php -S 192.168.0.61:8080
       */
     //public String endpoint_pacientes="http://192.168.0.61:8080/api/pacientes/1";
-    public String base = "http://192.168.0.70:8080/api";
+    public String base = "http://192.168.0.77:8080/api";
     private final String EP_PACIENTES = base + "/pacientes";
     private final String EP_LOGIN = base + "/login";
     private final String EP_OBRAS_SOCIALES = base + "/os";
+    private final String EP_ESPECIALIDADES = base + "/especialidades";
 
     private RequestQueue requestQueue;
     private Usuario usuario;
@@ -165,7 +166,48 @@ public class APITurnosManager {
                      */
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        callback.showToast("Ocurrio un error al realizar la consulta al servidor.");
 
+                    }
+                });
+
+
+        this.requestQueue.add(request);
+
+    }
+
+    public void getEspecialidades(final OnFinishCallback callback){
+
+        StringRequest request = new StringRequest(Request.Method.GET,
+                EP_ESPECIALIDADES,
+                new Response.Listener<String>() {
+                    /**
+                     * Called when a response is received.
+                     *
+                     * @param response
+                     */
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        Especialidad[] especialidades = gson.fromJson(response.toString(), Especialidad[].class);
+
+                        Log.i("ESPECIALIDADES", especialidades.length + "");
+
+                        callback.successAction(especialidades);
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    /**
+                     * Callback method that an error has been occurred with the
+                     * provided error code and optional user-readable message.
+                     *
+                     * @param error
+                     */
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.showToast("Ocurrio un error al realizar la consulta al servidor.");
                     }
                 });
 
