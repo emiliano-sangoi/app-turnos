@@ -4,8 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:paddingLeft="10dp"
-android:paddingRight="10dp"
+android:padding="@dimen/padding_outer_layout"
 tools:context="com.example.emiliano.appturnos.LoginActivity">
 
 <TextView
@@ -16,7 +15,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:textStyle="bold"
     android:layout_alignParentTop="true"
     android:layout_marginTop="39dp"
-    android:textSize="24sp"
+    android:textSize="@dimen/txts_default"
     android:text="Usuario:" />
 
 <EditText
@@ -29,10 +28,10 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:height="24dp"
     android:background="@drawable/borde_negro"
     android:inputType="textPersonName"
-    android:padding="15dp"
+    android:padding="12dp"
     android:selectAllOnFocus="false"
     android:text="@string/user_ej"
-    android:textSize="20sp" />
+    android:textSize="@dimen/txts_default" />
 
 <TextView
     android:id="@+id/labelPwd"
@@ -41,7 +40,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:layout_below="@+id/etUsername"
     android:layout_marginTop="30dp"
     android:textStyle="bold"
-    android:textSize="24sp"
+    android:textSize="@dimen/txts_default"
     android:text="Contraseña:" />
 
 <EditText
@@ -51,11 +50,11 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:layout_below="@+id/labelPwd"
     android:layout_marginTop="10dp"
     android:background="@drawable/borde_negro"
-    android:padding="15dp"
+    android:padding="12dp"
     android:height="24dp"
     android:inputType="textPassword"
     android:text="@string/pwd_user_ej"
-    android:textSize="24sp" />
+    android:textSize="@dimen/txts_default" />
 
 <Button
     android:id="@+id/btnIngresar"
@@ -65,11 +64,10 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:layout_alignParentBottom="true"
     android:background="@color/colorPrimaryDark"
     android:textColor="@color/colorWhite"
-    android:layout_marginBottom="20dp"
     android:onClick="onIngresar"
     android:text="Ingresar"
-    android:padding="15dp"
-    android:textSize="24sp" />
+    android:padding="@dimen/padding_btn"
+    android:textSize="@dimen/txts_5" />
 
 <TextView
     android:id="@+id/tvMsgLogin"

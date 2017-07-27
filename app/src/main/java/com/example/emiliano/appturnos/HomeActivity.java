@@ -51,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
 
             //cambiar su estado a logueado:
             usuario.setLogueado(true);
+
+            //Toast.makeText(this,"ES PACIENTE: " + (usuario.esPaciente() ? "Si" : "No"), Toast.LENGTH_LONG).show();
         }
 
 

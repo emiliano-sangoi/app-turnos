@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="txts_titulo">33dp</dimen>
+    <dimen name="txts_subtitulo">30dp</dimen>
+    <dimen name="txts_1">28dp</dimen>
+    <dimen name="txts_2">26dp</dimen>
+    <dimen name="txts_3">23dp</dimen>
+    <dimen name="txts_4">20dp</dimen>
+    <dimen name="txts_5">17dp</dimen>
+    <dimen name="txts_6">14dp</dimen>
+    <dimen name="txts_default">22dp</dimen>
+
+    <!--Margins & Paddings-->
+    <dimen name="padding_outer_layout">15dp</dimen>
+    <dimen name="padding_btn">15dp</dimen>
+
+
+
+</resources>

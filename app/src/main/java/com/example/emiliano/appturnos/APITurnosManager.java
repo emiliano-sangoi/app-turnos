@@ -40,23 +40,24 @@ import java.util.Set;
 
 public class APITurnosManager {
 
-    /*
-     La IP publica fue sacada desde la terminal con hostname -I
-     Por ej: 192.168.0.61 (esta ip va cambiando)
-     Luego se levanta la api (PHP Builtin Server) con:
-                php -S 192.168.0.61:8080
-      */
-    //public String endpoint_pacientes="http://192.168.0.61:8080/api/pacientes/1";
-    public String base = "http://192.168.0.77:8080/api";
-    private final String EP_PACIENTES = base + "/pacientes";
-    private final String EP_LOGIN = base + "/login";
-    private final String EP_OBRAS_SOCIALES = base + "/os";
-    private final String EP_ESPECIALIDADES = base + "/especialidades";
+    private String host;
+    private Integer port;
+
+    private String EP_PACIENTES;
+    private String EP_LOGIN;
+    private String EP_OBRAS_SOCIALES;
+    private String EP_ESPECIALIDADES;
+    private String EP_MEDICOS;
 
     private RequestQueue requestQueue;
     private Usuario usuario;
     private String ultimoError;
 
+    /**
+     * Constructor
+     *
+     * @param requestQueue
+     */
     public APITurnosManager(RequestQueue requestQueue) {
 
         //Inicializacion de variables:
@@ -66,6 +67,17 @@ public class APITurnosManager {
 
         //Ultimos error:
         this.ultimoError = new String();
+
+        //Parametros de configuracion:
+        this.host = "192.168.0.14";
+        this.port = 8080;
+
+        //URLs:
+        EP_PACIENTES = this.getBaseUrl() + "/pacientes";
+        EP_LOGIN = this.getBaseUrl() + "/login";
+        EP_OBRAS_SOCIALES = this.getBaseUrl() + "/os";
+        EP_ESPECIALIDADES = this.getBaseUrl() + "/especialidades";
+        EP_MEDICOS = this.getBaseUrl() + "/medicos";
 
 
     }
@@ -98,9 +110,11 @@ public class APITurnosManager {
                             Gson gson = new Gson();
 
                             usuario = gson.fromJson(response.toString(), Usuario.class);
+
                             callback.successAction(usuario);
 
                             Log.i("USUARIO: ", response.toString());
+                            //Log.i("ES PACIENTE: ", usuario.esPaciente() ? "Si" : "No");
 
                     }
 
@@ -108,15 +122,24 @@ public class APITurnosManager {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        switch (error.networkResponse.statusCode){
-                            case 401: //unauthorized
-                                callback.showToast("Usuario y/o contraseña incorrectos");
-                                break;
-                            default:
-                                callback.showToast("Ocurrio un error desde la API. HTTTP Code: " + error.networkResponse.statusCode);
-                                ultimoError = error.toString();
-                                Log.e("LOGIN ERROR:", error.toString());
+
+                        try{
+                            switch (error.networkResponse.statusCode) {
+                                case 401: //unauthorized
+                                    callback.showToast("Usuario y/o contraseña incorrectos");
+                                    break;
+                                default:
+                                    callback.showToast("Ocurrio un error desde la API.");
+                                    ultimoError = error.toString();
+                                    Log.e("LOGIN ERROR:", error.toString());
+                            }
+
+                        }catch (NullPointerException e){
+                            callback.showToast("Ocurrio un error al intentar verificar las credenciales. Probablemente el servidor no se encuentre funcionando correctamente.");
+                            e.printStackTrace();
+                            Log.d("ERROR", e.getMessage());
                         }
+
                     }
 
                 }
@@ -191,9 +214,51 @@ public class APITurnosManager {
                         Gson gson = new Gson();
                         Especialidad[] especialidades = gson.fromJson(response.toString(), Especialidad[].class);
 
-                        Log.i("ESPECIALIDADES", especialidades.length + "");
+                        //Log.i("ESPECIALIDADES", especialidades.length + "");
+                        Log.i("ESPECIALIDADES", response.toString());
 
                         callback.successAction(especialidades);
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    /**
+                     * Callback method that an error has been occurred with the
+                     * provided error code and optional user-readable message.
+                     *
+                     * @param error
+                     */
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.showToast("Ocurrio un error al realizar la consulta al servidor.");
+                    }
+                });
+
+
+        this.requestQueue.add(request);
+
+    }
+
+    public void getMedicos(final OnFinishCallback callback, Integer idEsp){
+
+        StringRequest request = new StringRequest(Request.Method.GET,
+                EP_MEDICOS + "/especialidad/" + idEsp,
+                new Response.Listener<String>() {
+                    /**
+                     * Called when a response is received.
+                     *
+                     * @param response
+                     */
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        Medico[] medicos = gson.fromJson(response.toString(), Medico[].class);
+
+                        Log.i("MEDICOS -> size = ", medicos.length + "");
+                        //Log.i("MEDICOS ->", response.toString());
+
+                        callback.successAction(medicos);
 
                     }
                 },
@@ -290,4 +355,34 @@ public class APITurnosManager {
     //--------------------------------------------------------------------------------------------
     //MEDICOS
 
+
+
+    //Getters & Setters:
+
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    /*
+   La IP publica fue sacada desde la terminal con hostname -I
+   Por ej: 192.168.0.61 (esta ip va cambiando)
+   Luego se levanta la api (PHP Builtin Server) con:
+              php -S 192.168.0.61:8080
+    */
+    public String getBaseUrl(){
+        return "http://" + this.host + ":" + this.port + "/api";
+    }
 }

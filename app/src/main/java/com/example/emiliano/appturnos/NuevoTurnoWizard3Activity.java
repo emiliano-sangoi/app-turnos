@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +17,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-/**
- * En esta actividad el usuario define la especialidad medica
- */
-
-public class NuevoTurnoWizard2Activity extends AppCompatActivity {
+public class NuevoTurnoWizard3Activity extends AppCompatActivity {
 
     /**
      * Interfaz para realizar consultas al backend
@@ -40,25 +35,24 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
     private Turno turno;
 
     /**
-     * Especialidades medicas
+     * Medicos disponibles para la especialidad elegida por el usuario.
      */
-    private Especialidad[] especialidades;
+    private Medico[] medicos;
 
     //COMPONENTES VISUALES:
     private Spinner spinner;
     private ArrayAdapter spinnerAdapter;
-    private Button btnCancel;
-    private Button btnAnt;
     private Button btnSig;
+    private Button btnPrev;
     private TextView titulo;
 
     //CONSTANTES:
-    public final int REQ_CODE_TO_W3 = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nuevo_turno_wizard2);
+        setContentView(R.layout.activity_nuevo_turno_wizard3);
 
         RequestQueue rq = Volley.newRequestQueue(this);
         this.apiTurnos = new APITurnosManager(rq);
@@ -71,68 +65,47 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
         //inicializar y asociar eventos a los componentes visuales:
         this.initUI();
 
-        this.getEspecialidades();
-
-        //Toast.makeText(this,"Especialidad: " + (turno.getEspecialidad()!= null ? turno.getEspecialidad().getIdEspecialidad() : "Null"), Toast.LENGTH_LONG).show();
+        this.getMedicosConEspecialidad();
+        //Especialidad tmp = this.turno.getEspecialidad();
+        //Toast.makeText(this, "" + (tmp != null ? tmp : "es null") , Toast.LENGTH_LONG).show();
 
     }
 
     /**
      * Carga las especialidades medicas desde el backend
      */
-    private void getEspecialidades() {
+    private void getMedicosConEspecialidad(){
 
-        OnFinishCallback callback = new OnFinishCallback(this) {
+        OnFinishCallback callback = new OnFinishCallback(this){
 
             @Override
             public void successAction(Object[] data) {
                 //cargar el spinner con las opciones
-                especialidades = (Especialidad[]) data;
+                medicos = (Medico[]) data;
 
                 cargarSpinner();
-                setEspSeleccionada();
 
-                //Habilitar el boton siguiente:
-                btnSig.setEnabled(true);
+                //Se selecciona un elemento en caso de que se encuentre seteado una especialidad en el turno:
+                //setSelectedItem();
+
 
             }
         };
 
-        //deshabilitar el boton mientras se realiza la peticion al servidor:
-        this.btnSig.setEnabled(false);
-        this.apiTurnos.getEspecialidades(callback);
+        this.apiTurnos.getMedicos(callback, 8);
+        //this.apiTurnos.getMedicos(callback, this.turno.getEspecialidad().getIdEspecialidad());
 
     }
 
     /**
      * Llena el spinner con los valores obtenidos
      */
-    private void cargarSpinner() {
+    private void cargarSpinner(){
 
-        this.spinnerAdapter = new ArrayAdapter(this, R.layout.my_spinner_layout, this.especialidades);
+        this.spinnerAdapter = new ArrayAdapter(this, R.layout.my_spinner_layout, this.medicos);
         this.spinnerAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         this.spinner.setAdapter(this.spinnerAdapter);
 
-    }
-
-
-    public void setEspSeleccionada(){
-        //setear el item seleccionado:
-        if(turno.getEspecialidad() != null){
-
-            for(int i=0; i<especialidades.length; i++){
-                if(especialidades[i].getIdEspecialidad().equals(turno.getEspecialidad().getIdEspecialidad())){
-                    this.spinner.setSelection(this.spinnerAdapter.getPosition(especialidades[i]));
-                    break;
-                }
-            }
-
-        }else{
-            if(especialidades.length > 0){
-                this.spinner.setSelection(this.spinnerAdapter.getPosition(especialidades[0]));
-            }
-
-        }
     }
 
     /**
@@ -140,8 +113,8 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
      *
      * @param view
      */
-    public void onW2BtnCancelar(View view) {
-        Intent i = new Intent(this, NuevoTurnoWizard1Activity.class);
+    public void onW3BtnCancelar(View view){
+        Intent i = new Intent(this, NuevoTurnoWizard2Activity.class);
         setResult(Activity.RESULT_CANCELED, i);
         finish();
     }
@@ -152,14 +125,12 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
      *
      * @param view
      */
-    public void onW2BtnAntClick(View view) {
+    public void onW3BtnAntClick(View view){
 
-        Especialidad esp = (Especialidad) spinner.getSelectedItem();
-        this.turno.setEspecialidad(esp);
-        //Log.i("ESP: " , esp.toString());
+        Medico m = (Medico) spinner.getSelectedItem();
+        this.turno.setMedico(m);
 
-
-        Intent i = new Intent(this, NuevoTurnoWizard1Activity.class);
+        Intent i = new Intent(this, NuevoTurnoWizard2Activity.class);
         Bundle data = new Bundle();
         data.putSerializable("turno", this.turno);
         i.putExtras(data);
@@ -170,23 +141,25 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
     /**
      * Evento al presionar el boton siguiente
-     *
      * @param view
      */
-    public void onW2BtnSigClick(View view) {
-
-        Especialidad esp = (Especialidad) spinner.getSelectedItem();
-        this.turno.setEspecialidad(esp);
-
-        Intent i = new Intent(this, NuevoTurnoWizard3Activity.class);
-        Bundle data = new Bundle();
-        data.putSerializable("usuario", this.usuario);
-        data.putSerializable("turno", this.turno);
-        i.putExtras(data);
-        startActivityForResult(i, REQ_CODE_TO_W3);
+    public void onW3BtnSigClick(View view){
+        Toast.makeText(this, "No se ha implementado todavia", Toast.LENGTH_LONG).show();
+    }
 
 
-        //Toast.makeText(this, "No se ha implementado todavia", Toast.LENGTH_LONG).show();
+    public void w3CambiarFechaTurnoClick(View view){
+
+        FechaPickerFragment datePicker = new FechaPickerFragment();
+
+        Bundle arg = new Bundle();
+        arg.putInt("fecha_id", R.id.w3TxtFechaTurno);
+        datePicker.setArguments(arg);
+
+        datePicker.show(getFragmentManager(), "datePicker");
+
+
+
     }
 
 
@@ -202,7 +175,7 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
             case Activity.RESULT_CANCELED:
                 //volver a la principal sin actualizar nada
-                Intent i = new Intent(this, NuevoTurnoWizard1Activity.class);
+                Intent i = new Intent(this, NuevoTurnoWizard2Activity.class);
                 setResult(Activity.RESULT_CANCELED, i);
                 finish();
         }
@@ -210,10 +183,9 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
     }
 
-
-
     /**********************************************************************************/
     // Menu principal
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -222,10 +194,10 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.main_menu_item_salir:
                 usuario.setLogueado(false);
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity( new Intent(this, LoginActivity.class) );
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -233,17 +205,16 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
     /**********************************************************************************/
     // Iniciar componentes UI
-    private void initUI() {
+    private void initUI(){
 
-        this.spinner = (Spinner) findViewById(R.id.spinnerEsp);
+        this.spinner = (Spinner) findViewById(R.id.spinnerMedicos);
 
         this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                btnSig.setEnabled(true);
-
                 //Guardar la especialidad medica:
+                turno.setMedico(medicos[position]);
                 //turno.setEspecialidad(spinnerAdapter.getItem(position));
 
             }
@@ -255,15 +226,9 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
         });
 
 
-        //Boton siguiente:
-        this.btnSig = (Button) findViewById(R.id.w2BtnSig);
-
-
-
-
         //Toast.makeText(this, (turno == null ? "es null" : "no es null"), Toast.LENGTH_LONG).show();
 
-        if (turno.getEspecialidad() != null) {
+        if(turno.getEspecialidad() != null) {
 
             /*for(int i=0; i<spinner.getCount(); i++){
                 if(spinner.getItemAtPosition(i).equals(turno.getEspecialidad().toString())){
@@ -290,11 +255,15 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
         }
 
-        this.titulo = (TextView) findViewById(R.id.w2TxtTitulo);
-        this.titulo.setText("Nuevo Turno (2/4)");
+
+        //Botones y Textview:
+        this.titulo = (TextView) findViewById(R.id.w3TxtTitulo);
+        this.titulo.setText("Nuevo Turno (3/4)");
+
 
 
     }
+
 
 
 }

@@ -8,7 +8,6 @@
     <string name="w_nuevo_turno_tit">Nuevo Turno</string>
     <string name="w1_txt_desc">Seleccione la obra social con la que realizara la consulta medica. Es posible que el sanatorio no tenga convenio con esa obra social, por lo que no podrá realizar la consulta a menos que abone el monto correspondiente a la misma.</string>
 
-
     <!--Buttons:-->
     <string name="txtBtnCancel">Cancelar</string>
 </resources>

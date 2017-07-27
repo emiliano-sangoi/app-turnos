@@ -11,11 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -47,9 +50,12 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
     private Afiliacion[] afiliaciones;
 
     //COMPONENTES VISUALES:
-    private Spinner spinnerAfiliaciones;
-    private ArrayAdapter adapter;
+    private Spinner spinner;
+    private ArrayAdapter spinnerAdapter;
     private CheckBox checkBoxPagarConsulta;
+    private Button btnSig;
+    private TextView titulo;
+
 
     //CONSTANTES
     public final int REQ_CODE_TO_W2 = 1;
@@ -69,12 +75,11 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
         //Instanciar un nuevo turno
         this.turno = new Turno();
 
-        //obtiene las afiliaciones del backend:
-        this.cargarAfiliaciones();
-
         //inicializar y asociar eventos a los componentes visuales:
         this.initUI();
 
+        //obtiene las afiliaciones del backend:
+        this.cargarAfiliaciones();
     }
 
 
@@ -98,10 +103,15 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
 
                 //cargar el spinner con las opciones
                 cargarSpinner(data);
+                setOSSeleccionada();
+
+                //Habilitar el boton siguiente:
+                btnSig.setEnabled(true);
 
             }
         };
 
+        this.btnSig.setEnabled(false);
         this.apiTurnos.getAfiliaciones(callback, 12);
 
     }
@@ -114,13 +124,32 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
      */
     private void cargarSpinner(Object[] afiliaciones) {
 
-        this.adapter = new ArrayAdapter(this, R.layout.my_spinner_layout, afiliaciones);
+        this.spinnerAdapter = new ArrayAdapter(this, R.layout.my_spinner_layout, afiliaciones);
         // adapter.setDropDownViewResource(R.layout.my_spinner_layout);
-        this.adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        this.spinnerAfiliaciones.setAdapter(this.adapter);
+        this.spinnerAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        this.spinner.setAdapter(this.spinnerAdapter);
 
     }
 
+
+    public void setOSSeleccionada(){
+        //setear el item seleccionado:
+        if(turno.getEspecialidad() != null){
+
+            for(int i=0; i<afiliaciones.length; i++){
+                if(afiliaciones[i].getIdOs() == turno.getObraSocialId()){
+                    this.spinner.setSelection(this.spinnerAdapter.getPosition(afiliaciones[i]));
+                    break;
+                }
+            }
+
+        }else{
+            if(afiliaciones.length > 0){
+                this.spinner.setSelection(this.spinnerAdapter.getPosition(afiliaciones[0]));
+            }
+
+        }
+    }
 
     /**
      * Metodo ejecutado al presionar el boton cancelar
@@ -159,7 +188,8 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
         switch (resultCode) {
             case Activity.RESULT_OK:
                 //Actualizar turno:
-                this.turno = (Turno) getIntent().getExtras().getSerializable("turno");
+                this.turno = (Turno) data.getExtras().getSerializable("turno");
+                //Toast.makeText(this, turno.getObraSocialId() + "", Toast.LENGTH_LONG).show();
                 break;
 
             case Activity.RESULT_CANCELED:
@@ -199,7 +229,7 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
     private void initUI() {
 
         //componentes visuales
-        this.spinnerAfiliaciones = (Spinner) findViewById(R.id.w1SpinnerAfiliaciones);
+        this.spinner = (Spinner) findViewById(R.id.w1SpinnerAfiliaciones);
         this.checkBoxPagarConsulta = (CheckBox) findViewById(R.id.w1CKBoxPagarConsulta);
 
         //Eventos
@@ -207,19 +237,19 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    spinnerAfiliaciones.setEnabled(false);
+                    spinner.setEnabled(false);
                     //el usuario decide pagar la consulta:
                     turno.setObraSocialId(null);
 
                 } else {
-                    spinnerAfiliaciones.setEnabled(true);
+                    spinner.setEnabled(true);
                 }
             }
 
         });
 
         //Cuando se seleccione un item del listado de afiliaciones a una obra social:
-        this.spinnerAfiliaciones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Afiliacion afiliacion = afiliaciones[position];
@@ -235,6 +265,10 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
                 turno.setObraSocialId(null);
             }
         });
+
+        this.btnSig = (Button) findViewById(R.id.w1BtnSig);
+        this.titulo = (TextView) findViewById(R.id.w1TxtTitulo);
+        this.titulo.setText("Nuevo Turno (1/4)");
 
     }
 

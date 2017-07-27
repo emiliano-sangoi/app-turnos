@@ -3,7 +3,7 @@
     android:id="@+id/w1SpinnerAfiliaciones"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textSize="20dp"
+    android:textSize="@dimen/txts_default"
     android:padding="5dp"
 
     />

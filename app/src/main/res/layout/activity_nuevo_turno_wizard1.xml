@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
+    android:padding="@dimen/padding_outer_layout"
     tools:context="com.example.emiliano.appturnos.NuevoTurnoWizard1Activity">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/w_nuevo_turno_tit"
-        android:textSize="32dp"
+        android:textSize="@dimen/txts_titulo"
         android:textStyle="bold" />
 
     <TextView
@@ -22,12 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/w1TxtTitulo"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Paso 1: Selección Obra Social"
-        android:textColor="@color/colorForest"
-        android:textSize="24dp"
-        android:textStyle="bold" />
+        android:text="Elija la obra social con la que realizara la consulta. Si no dispone, puede elejir abonar el importe de la consulta."
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txts_4" />
 
     <TextView
         android:id="@+id/w1TxtDesc"
@@ -36,7 +34,7 @@
         android:layout_below="@+id/w1TxtSubTitulo"
         android:layout_marginTop="15dp"
         android:text="@string/w1_txt_desc"
-        android:textSize="20dp"
+        android:textSize="@dimen/txts_default"
         android:visibility="gone" />
 
 
@@ -47,7 +45,7 @@
         android:layout_below="@+id/w1TxtDesc"
         android:layout_marginTop="20dp"
         android:text="Obras sociales disponibles:"
-        android:textSize="18dp"
+        android:textSize="@dimen/txts_default"
         android:textStyle="bold"
         android:visibility="gone" />
 
@@ -69,7 +67,7 @@
         android:layout_below="@+id/w1SpinnerAfiliaciones"
         android:layout_marginTop="36dp"
         android:text="Pagar consulta"
-        android:textSize="22dp" />
+        android:textSize="@dimen/txts_default" />
 
 
     <TableLayout
@@ -89,7 +87,8 @@
                 android:text="@string/txtBtnCancel"
                 android:onClick="onW1BtnCancelar"
                 android:textColor="@color/colorWhite"
-                android:textSize="20dp" />
+                android:padding="@dimen/padding_btn"
+                android:textSize="@dimen/txts_5" />
 
             <Button
                 android:id="@+id/w1BtnSig"
@@ -102,7 +101,9 @@
                 android:text="Siguiente"
                 android:onClick="onW1BtnSigClick"
                 android:textColor="@color/colorWhite"
-                android:textSize="20dp" />
+                android:enabled="false"
+                android:padding="@dimen/padding_btn"
+                android:textSize="@dimen/txts_5" />
 
 
         </TableRow>

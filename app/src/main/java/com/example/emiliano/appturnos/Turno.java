@@ -13,9 +13,10 @@ public class Turno implements Serializable{
     private Integer horario_atencion_id;
     private Integer obra_social_id;
     private String obra_social_nombre;
-    private Integer medico_id;
-    private Integer medico_especialidad_id;
-    private String medico_especialidad_nombre;
+    private Medico medico;
+    //private Integer medico_especialidad_id;
+    //private String medico_especialidad_nombre;
+    private Especialidad especialidad;
     private Integer sanatorio_id;
     private String sanatorio_nombre;
     private String sanatorio_direccion;
@@ -24,6 +25,7 @@ public class Turno implements Serializable{
     private Integer fecha_hora_fin;
 
     public Turno() {
+        this.especialidad = null;
 
     }
 
@@ -67,14 +69,23 @@ public class Turno implements Serializable{
         this.obra_social_nombre = obra_social_nombre;
     }
 
-    public Integer getMedicoId() {
-        return medico_id;
+    public Medico getMedico() {
+        return medico;
     }
 
-    public void setMedicoId(Integer medico_id) {
-        this.medico_id = medico_id;
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    /*
     public Integer getMedicoEspecialidadId() {
         return medico_especialidad_id;
     }
@@ -89,7 +100,7 @@ public class Turno implements Serializable{
 
     public void setMedicoEspecialidadNombre(String medico_especialidad_nombre) {
         this.medico_especialidad_nombre = medico_especialidad_nombre;
-    }
+    }*/
 
     public Integer getSanatorioId() {
         return sanatorio_id;
