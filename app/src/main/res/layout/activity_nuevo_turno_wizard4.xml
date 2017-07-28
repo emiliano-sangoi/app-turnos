@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_outer_layout"
-    tools:context="com.example.emiliano.appturnos.NuevoTurnoWizard3Activity">
+    tools:context="com.example.emiliano.appturnos.NuevoTurnoWizard4Activity">
+
 
 
     <TextView
-        android:id="@+id/w3TxtTitulo"
+        android:id="@+id/w4TxtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,7 +19,7 @@
         android:textStyle="bold" />
 
     <ProgressBar
-        android:id="@+id/w3IndeterminateBar"
+        android:id="@+id/w4IndeterminateBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -28,67 +29,18 @@
         android:maxHeight="@dimen/txts_4"
         android:maxWidth="@dimen/txts_4"
         android:visibility="gone"
-        android:layout_above="@+id/w3TxtSubTitulo" />
+        android:layout_above="@+id/w4TxtSubTitulo" />
 
     <TextView
-        android:id="@+id/w3TxtSubTitulo"
+        android:id="@+id/w4TxtSubTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/w3TxtTitulo"
+        android:layout_below="@+id/w4TxtTitulo"
         android:layout_marginTop="30dp"
-        android:text="Seleccione un médico y un día para la consulta."
+        android:text="Revise los datos ingresados y a continuación presione 'Finalizar' "
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/txts_4"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/w3TxtLabelMedicos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/w3TxtSubTitulo"
-        android:layout_marginTop="20dp"
-        android:text="Elija un medico:"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/txts_4"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spinnerMedicos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/w3TxtLabelMedicos"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:id="@+id/w3TxtLabelFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerMedicos"
-        android:layout_marginTop="10dp"
-        android:text="Elija un día:"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/txts_4"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/w3TxtFechaTurno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/w3TxtLabelFecha"
-        android:layout_marginTop="10dp"
-        android:inputType="date" />
-
-    <Button
-        android:id="@+id/btnCambiarFechaNac"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="w3CambiarFechaTurnoClick"
-        android:layout_below="@+id/w3TxtFechaTurno"
-        android:textSize="@dimen/txts_5"
-        android:text="Cambiar fecha" />
-
 
 
     <TableLayout
@@ -146,5 +98,6 @@
         </TableRow>
 
     </TableLayout>
+
 
 </RelativeLayout>
