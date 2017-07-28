@@ -1,6 +1,7 @@
 package com.example.emiliano.appturnos;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by emiliano on 14/07/17.
@@ -23,6 +24,7 @@ public class Turno implements Serializable{
     private String sanatorio_telefono;
     private Integer fecha_hora_ini;
     private Integer fecha_hora_fin;
+    private Date dia;
 
     public Turno() {
         this.especialidad = null;
@@ -148,5 +150,13 @@ public class Turno implements Serializable{
 
     public void setFechaHoraFin(Integer fecha_hora_fin) {
         this.fecha_hora_fin = fecha_hora_fin;
+    }
+
+    public Date getDia() {
+        return dia;
+    }
+
+    public void setDia(Date dia) {
+        this.dia = dia;
     }
 }

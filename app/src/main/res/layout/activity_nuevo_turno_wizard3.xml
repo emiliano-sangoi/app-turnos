@@ -13,10 +13,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:text="@string/w_nuevo_turno_tit"
         android:textSize="@dimen/txts_titulo"
         android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/w3IndeterminateBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTintMode="src_in"
+        android:maxHeight="@dimen/txts_4"
+        android:maxWidth="@dimen/txts_4"
+        android:visibility="gone"
+        android:layout_above="@+id/w3TxtSubTitulo" />
 
     <TextView
         android:id="@+id/w3TxtSubTitulo"
@@ -89,6 +101,7 @@
         android:visibility="gone" />
 
 
+
     <TextView
         android:id="@+id/w3Txt2"
         android:layout_width="wrap_content"
@@ -148,7 +161,6 @@
                 android:onClick="onW3BtnSigClick"
                 android:background="@color/colorPrimary"
                 android:text="Siguiente"
-                android:enabled="false"
                 android:textColor="@color/colorWhite"
                 android:paddingTop="@dimen/padding_btn"
                 android:paddingBottom="@dimen/padding_btn"

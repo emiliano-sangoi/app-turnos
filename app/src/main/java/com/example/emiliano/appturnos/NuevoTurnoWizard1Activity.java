@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -55,6 +56,7 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
     private CheckBox checkBoxPagarConsulta;
     private Button btnSig;
     private TextView titulo;
+    private ProgressBar progressBar;
 
 
     //CONSTANTES
@@ -108,11 +110,17 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
                 //Habilitar el boton siguiente:
                 btnSig.setEnabled(true);
 
+
+                //Ocultar la barra de progreso:
+                progressBar.setVisibility(View.GONE);
+
             }
         };
 
+        //this.progressBar.setVisibility(View.VISIBLE);
         this.btnSig.setEnabled(false);
         this.apiTurnos.getAfiliaciones(callback, 12);
+        //this.progressBar.setVisibility(View.GONE);
 
     }
 
@@ -269,6 +277,8 @@ public class NuevoTurnoWizard1Activity extends AppCompatActivity {
         this.btnSig = (Button) findViewById(R.id.w1BtnSig);
         this.titulo = (TextView) findViewById(R.id.w1TxtTitulo);
         this.titulo.setText("Nuevo Turno (1/4)");
+        this.progressBar = (ProgressBar) findViewById(R.id.w1IndeterminateBar);
+        this.progressBar.setVisibility(View.VISIBLE);
 
     }
 

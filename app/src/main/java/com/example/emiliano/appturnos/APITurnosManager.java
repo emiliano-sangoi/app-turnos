@@ -69,7 +69,7 @@ public class APITurnosManager {
         this.ultimoError = new String();
 
         //Parametros de configuracion:
-        this.host = "192.168.0.14";
+        this.host = "192.168.0.17";
         this.port = 8080;
 
         //URLs:

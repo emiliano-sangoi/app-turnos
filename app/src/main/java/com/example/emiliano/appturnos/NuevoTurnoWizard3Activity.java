@@ -2,6 +2,9 @@ package com.example.emiliano.appturnos;
 
 import android.app.Activity;
 import android.content.Intent;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,12 +13,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class NuevoTurnoWizard3Activity extends AppCompatActivity {
 
@@ -39,12 +48,29 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
      */
     private Medico[] medicos;
 
+    /**
+     * Permite crear fechas a partir de strings
+     */
+    private SimpleDateFormat formatter;
+
+    /**
+     * Ultima fecha seleccionada
+     */
+    private Date ultimaFechaSel;
+
+    /**
+     * Date picker
+     */
+    private FechaPickerFragment datePicker;
+
     //COMPONENTES VISUALES:
     private Spinner spinner;
     private ArrayAdapter spinnerAdapter;
     private Button btnSig;
     private Button btnPrev;
     private TextView titulo;
+    private ProgressBar progressBar;
+    private EditText fechaTurno;
 
     //CONSTANTES:
 
@@ -61,6 +87,9 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
         Intent i = getIntent();
         usuario = (Usuario) i.getExtras().getSerializable("usuario");
         turno = (Turno) i.getExtras().getSerializable("turno");
+
+        //formatter:
+        this.formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
         //inicializar y asociar eventos a los componentes visuales:
         this.initUI();
@@ -84,9 +113,11 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
                 medicos = (Medico[]) data;
 
                 cargarSpinner();
+                setMedicoSel();
+                setFechaSel();
 
-                //Se selecciona un elemento en caso de que se encuentre seteado una especialidad en el turno:
-                //setSelectedItem();
+                //Ocultar la barra de progreso:
+                progressBar.setVisibility(View.GONE);
 
 
             }
@@ -108,6 +139,40 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
 
     }
 
+    private void setMedicoSel(){
+        //setear el item seleccionado:
+        if(turno.getMedico() != null){
+
+            for(int i=0; i<medicos.length; i++){
+                if(medicos[i].getIdUsuario() == turno.getMedico().getIdUsuario()){
+                    this.spinner.setSelection(this.spinnerAdapter.getPosition(medicos[i]));
+                    break;
+                }
+            }
+
+        }else{
+            if(medicos.length > 0){
+                this.spinner.setSelection(this.spinnerAdapter.getPosition(medicos[0]));
+            }
+
+        }
+    }
+
+    /**
+     * Funcion que setea la fecha definida en el turno o la fecha actual si no se ha definido ninguna.
+     */
+    private void setFechaSel(){
+
+        if(this.turno.getDia() != null){
+            String strFecha = this.formatter.format(this.turno.getDia());
+            this.fechaTurno.setText(strFecha);
+        }else{
+            //Setear fecha actual:
+            String strFecha = this.formatter.format(Calendar.getInstance().getTime());
+            this.fechaTurno.setText(strFecha);
+        }
+    }
+
     /**
      * Metodo ejecutado al presionar el boton cancelar
      *
@@ -127,15 +192,20 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
      */
     public void onW3BtnAntClick(View view){
 
-        Medico m = (Medico) spinner.getSelectedItem();
-        this.turno.setMedico(m);
+        //Guardar medico y fecha del turno
+        this.guardarMedicoEnTurno();
 
-        Intent i = new Intent(this, NuevoTurnoWizard2Activity.class);
-        Bundle data = new Bundle();
-        data.putSerializable("turno", this.turno);
-        i.putExtras(data);
-        setResult(Activity.RESULT_OK, i);
-        finish();
+        if(this.guardarFechaEnTurno()) {
+
+            Intent i = new Intent(this, NuevoTurnoWizard2Activity.class);
+            Bundle data = new Bundle();
+            data.putSerializable("turno", this.turno);
+            i.putExtras(data);
+            setResult(Activity.RESULT_OK, i);
+            finish();
+            //Toast.makeText(this, formatter.format(turno.getDia()), Toast.LENGTH_LONG).show();
+
+        }
 
     }
 
@@ -144,22 +214,57 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
      * @param view
      */
     public void onW3BtnSigClick(View view){
-        Toast.makeText(this, "No se ha implementado todavia", Toast.LENGTH_LONG).show();
+
+        //Guardar medico y fecha del turno
+        this.guardarMedicoEnTurno();
+        if(this.guardarFechaEnTurno()){
+            Toast.makeText(this, "No se ha implementado todavia", Toast.LENGTH_LONG).show();
+        }
+
+
+
     }
 
 
     public void w3CambiarFechaTurnoClick(View view){
 
-        FechaPickerFragment datePicker = new FechaPickerFragment();
-
         Bundle arg = new Bundle();
         arg.putInt("fecha_id", R.id.w3TxtFechaTurno);
         datePicker.setArguments(arg);
-
         datePicker.show(getFragmentManager(), "datePicker");
 
+    }
 
 
+    /**
+     * Funcion auxiliar que guarda la fecha en el turno
+     *
+     * @return
+     */
+    private boolean guardarFechaEnTurno(){
+
+        //turno.setEspecialidad(spinnerAdapter.getItem(position));
+        String fechaStr = fechaTurno.getText().toString();
+
+        try {
+            Date diaTurno = formatter.parse(fechaStr);
+            Toast.makeText(this, fechaStr, Toast.LENGTH_LONG).show();
+            turno.setDia(diaTurno);
+            return true;
+        } catch (ParseException e) {
+            Toast.makeText(getApplicationContext(), "Error en el formato de la fecha ingresado. El formato requerido es: dd/mm/yyyy", Toast.LENGTH_LONG).show();
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Funcion auxiliar que guarda el medico seleccionado en el turno
+     */
+    private void guardarMedicoEnTurno(){
+        Medico m = (Medico) spinner.getSelectedItem();
+        this.turno.setMedico(m);
     }
 
 
@@ -203,6 +308,7 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /**********************************************************************************/
     // Iniciar componentes UI
     private void initUI(){
@@ -213,9 +319,7 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                //Guardar la especialidad medica:
-                turno.setMedico(medicos[position]);
-                //turno.setEspecialidad(spinnerAdapter.getItem(position));
+                //accion a realizar al seleccionar un medico...
 
             }
 
@@ -226,40 +330,15 @@ public class NuevoTurnoWizard3Activity extends AppCompatActivity {
         });
 
 
-        //Toast.makeText(this, (turno == null ? "es null" : "no es null"), Toast.LENGTH_LONG).show();
-
-        if(turno.getEspecialidad() != null) {
-
-            /*for(int i=0; i<spinner.getCount(); i++){
-                if(spinner.getItemAtPosition(i).equals(turno.getEspecialidad().toString())){
-                    spinner.setSelection(i);
-                    break;
-                }
-            }*/
-
-           /* String nom = turno.getEspecialidad().getNomEspecialidad(); //the value you want the position for
-
-            ArrayAdapter myAdap = (ArrayAdapter) this.spinner.getAdapter(); //cast to an ArrayAdapter
-
-            int spinnerPosition = myAdap.getPosition(nom);
-
-//set the default according to value
-            this.spinner.setSelection(spinnerPosition);*/
-
-            //Toast.makeText(this, ("Id especialidad: " + turno.getEspecialidad().getIdEspecialidad()), Toast.LENGTH_LONG).show();
-
-            //int pos = spinnerAdapter.getPosition(turno.getEspecialidad());
-
-            //spinner.setSelection(pos);
-            //spinnerAdapter.notifyDataSetChanged();
-
-        }
-
-
         //Botones y Textview:
         this.titulo = (TextView) findViewById(R.id.w3TxtTitulo);
         this.titulo.setText("Nuevo Turno (3/4)");
+        this.progressBar = (ProgressBar) findViewById(R.id.w3IndeterminateBar);
+        this.progressBar.setVisibility(View.VISIBLE);
+        this.fechaTurno = (EditText) findViewById(R.id.w3TxtFechaTurno);
 
+        //DatePicker
+        this.datePicker = new FechaPickerFragment();
 
 
     }

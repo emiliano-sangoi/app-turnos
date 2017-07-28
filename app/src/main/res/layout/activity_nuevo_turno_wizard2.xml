@@ -12,10 +12,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:text="@string/w_nuevo_turno_tit"
         android:textSize="@dimen/txts_titulo"
         android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/w2IndeterminateBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTintMode="src_in"
+        android:maxHeight="@dimen/txts_4"
+        android:maxWidth="@dimen/txts_4"
+        android:visibility="gone"
+        android:layout_above="@+id/w2TxtSubTitulo" />
 
     <TextView
         android:id="@+id/w2TxtSubTitulo"

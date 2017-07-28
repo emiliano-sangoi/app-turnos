@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
     private Button btnAnt;
     private Button btnSig;
     private TextView titulo;
+    private ProgressBar progressBar;
 
     //CONSTANTES:
     public final int REQ_CODE_TO_W3 = 1;
@@ -94,6 +96,9 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
 
                 //Habilitar el boton siguiente:
                 btnSig.setEnabled(true);
+
+                //Ocultar la barra de progreso:
+                progressBar.setVisibility(View.GONE);
 
             }
         };
@@ -198,6 +203,7 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
                 //Actualizar turno:
                 this.turno = (Turno) data.getExtras().getSerializable("turno");
                 //Toast.makeText(this, turno.getObraSocialId() + "", Toast.LENGTH_LONG).show();
+
                 break;
 
             case Activity.RESULT_CANCELED:
@@ -258,41 +264,10 @@ public class NuevoTurnoWizard2Activity extends AppCompatActivity {
         //Boton siguiente:
         this.btnSig = (Button) findViewById(R.id.w2BtnSig);
 
-
-
-
-        //Toast.makeText(this, (turno == null ? "es null" : "no es null"), Toast.LENGTH_LONG).show();
-
-        if (turno.getEspecialidad() != null) {
-
-            /*for(int i=0; i<spinner.getCount(); i++){
-                if(spinner.getItemAtPosition(i).equals(turno.getEspecialidad().toString())){
-                    spinner.setSelection(i);
-                    break;
-                }
-            }*/
-
-           /* String nom = turno.getEspecialidad().getNomEspecialidad(); //the value you want the position for
-
-            ArrayAdapter myAdap = (ArrayAdapter) this.spinner.getAdapter(); //cast to an ArrayAdapter
-
-            int spinnerPosition = myAdap.getPosition(nom);
-
-//set the default according to value
-            this.spinner.setSelection(spinnerPosition);*/
-
-            //Toast.makeText(this, ("Id especialidad: " + turno.getEspecialidad().getIdEspecialidad()), Toast.LENGTH_LONG).show();
-
-            //int pos = spinnerAdapter.getPosition(turno.getEspecialidad());
-
-            //spinner.setSelection(pos);
-            //spinnerAdapter.notifyDataSetChanged();
-
-        }
-
         this.titulo = (TextView) findViewById(R.id.w2TxtTitulo);
         this.titulo.setText("Nuevo Turno (2/4)");
-
+        this.progressBar = (ProgressBar) findViewById(R.id.w2IndeterminateBar);
+        this.progressBar.setVisibility(View.VISIBLE);
 
     }
 
