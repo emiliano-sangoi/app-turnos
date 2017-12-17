@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:padding="@dimen/padding_outer_layout"
-tools:context="com.example.emiliano.appturnos.LoginActivity">
+tools:context="com.example.emiliano.appturnos.activity.LoginActivity">
 
 <TextView
     android:id="@+id/labelUsername"
@@ -30,7 +30,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:inputType="textPersonName"
     android:padding="12dp"
     android:selectAllOnFocus="false"
-    android:text="@string/user_ej"
+    android:text="@string/username2"
     android:textSize="@dimen/txts_default" />
 
 <TextView
@@ -53,7 +53,7 @@ tools:context="com.example.emiliano.appturnos.LoginActivity">
     android:padding="12dp"
     android:height="24dp"
     android:inputType="textPassword"
-    android:text="@string/pwd_user_ej"
+    android:text="@string/password2"
     android:textSize="@dimen/txts_default" />
 
 <Button

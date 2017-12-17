@@ -1,32 +1,22 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.backend;
 
-import android.content.Context;
-import android.content.IntentSender;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.emiliano.appturnos.event.OnFinishCallback;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.ConnectException;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by emiliano on 05/07/17.
@@ -52,6 +42,7 @@ public class APITurnosManager {
     private RequestQueue requestQueue;
     private Usuario usuario;
     private String ultimoError;
+    private SimpleDateFormat formatter;
 
     /**
      * Constructor
@@ -69,8 +60,8 @@ public class APITurnosManager {
         this.ultimoError = new String();
 
         //Parametros de configuracion:
-        this.host = "192.168.0.17";
-        this.port = 8080;
+        this.host = "192.168.1.108";
+        this.port = 8000;
 
         //URLs:
         EP_PACIENTES = this.getBaseUrl() + "/pacientes";
@@ -78,6 +69,8 @@ public class APITurnosManager {
         EP_OBRAS_SOCIALES = this.getBaseUrl() + "/os";
         EP_ESPECIALIDADES = this.getBaseUrl() + "/especialidades";
         EP_MEDICOS = this.getBaseUrl() + "/medicos";
+
+        this.formatter = new SimpleDateFormat("yMMdd");
 
 
     }
@@ -99,7 +92,7 @@ public class APITurnosManager {
         params.put("username", username);
         params.put("password", password);
 
-
+        Log.i("EP LOGIN",  EP_LOGIN);
 
         JsonObjectRequest request = new JsonObjectRequest(EP_LOGIN, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
@@ -259,6 +252,52 @@ public class APITurnosManager {
                         //Log.i("MEDICOS ->", response.toString());
 
                         callback.successAction(medicos);
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    /**
+                     * Callback method that an error has been occurred with the
+                     * provided error code and optional user-readable message.
+                     *
+                     * @param error
+                     */
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.showToast("Ocurrio un error al realizar la consulta al servidor.");
+                    }
+                });
+
+
+        this.requestQueue.add(request);
+
+    }
+
+    public void getHorariosPorMedicoYDia(final OnFinishCallback callback, Integer idMedico, Date dia){
+
+
+        String url = this.getBaseUrl() + "/horarios/medico/" + idMedico + "/dia/" + formatter.format(dia);
+
+        Log.i("HORARIOS -> ", "getHorariosPorMedicoYDia() -> Obteniendo horarios de " + url);
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    /**
+                     * Called when a response is received.
+                     *
+                     * @param response
+                     */
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        Log.i("Horarios", response.toString());
+
+                        HorarioAtencion[] horariosAtencion = gson.fromJson(response.toString(), HorarioAtencion[].class);
+
+                        //Log.i("HORARIOS -> ", "getHorariosPorMedicoYDia() -> Cant. registros obtenidos: " + horariosAtencion.length);
+
+                        callback.successAction(horariosAtencion);
 
                     }
                 },

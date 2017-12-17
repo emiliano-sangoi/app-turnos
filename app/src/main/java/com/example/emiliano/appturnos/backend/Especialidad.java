@@ -1,4 +1,4 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.backend;
 
 import java.io.Serializable;
 

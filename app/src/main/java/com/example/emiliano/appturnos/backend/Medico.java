@@ -1,15 +1,14 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.backend;
 
 import java.io.Serializable;
 
 /**
- * Created by emiliano on 05/07/17.
+ * Created by emiliano on 23/07/17.
  */
 
-public class Usuario implements Serializable {
-
+public class Medico implements Serializable {
     private Integer id_usuario;
-    private Integer id_paciente;
+    private String nro_matricula;
     private String username;
     private String password;
     private String apellidos;
@@ -20,11 +19,9 @@ public class Usuario implements Serializable {
     private String direccion;
     private String fecha_nac;
 
-    private transient boolean logueado;
-
-    public Usuario(Integer id_usuario, Integer id_paciente, String username, String password, String apellidos, String nombres, Integer tipo_doc, Integer nro_doc, String email, String direccion, String fecha_nac) {
+    public Medico(Integer id_usuario, String nro_matricula, String username, String password, String apellidos, String nombres, Integer tipo_doc, Integer nro_doc, String email, String direccion, String fecha_nac) {
         this.id_usuario = id_usuario;
-        this.id_paciente = id_paciente;
+        this.nro_matricula = nro_matricula;
         this.username = username;
         this.password = password;
         this.apellidos = apellidos;
@@ -36,7 +33,7 @@ public class Usuario implements Serializable {
         this.fecha_nac = fecha_nac;
     }
 
-    public Usuario() {
+    public Medico() {
 
     }
 
@@ -49,12 +46,12 @@ public class Usuario implements Serializable {
         this.id_usuario = id_usuario;
     }
 
-    public int getIdPaciente() {
-        return id_paciente;
+    public String getNroMatricula() {
+        return nro_matricula;
     }
 
-    public void setIdPaciente(int id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setNroMatricula(String nro_matricula) {
+        this.nro_matricula = nro_matricula;
     }
 
     public String getUsername() {
@@ -87,14 +84,6 @@ public class Usuario implements Serializable {
 
     public void setNombres(String nombres) {
         this.nombres = nombres;
-    }
-
-    public boolean isLogueado() {
-        return logueado;
-    }
-
-    public void setLogueado(boolean logueado) {
-        this.logueado = logueado;
     }
 
     public int getTipoDoc() {
@@ -137,7 +126,8 @@ public class Usuario implements Serializable {
         this.fecha_nac = fecha_nac;
     }
 
-    public boolean esPaciente(){
-        return this.id_paciente != null;
+    @Override
+    public String toString() {
+        return "Dr/Dra. " + apellidos + ", " + nombres;
     }
 }

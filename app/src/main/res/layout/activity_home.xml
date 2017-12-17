@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_outer_layout"
-    tools:context="com.example.emiliano.appturnos.HomeActivity">
+    tools:context="com.example.emiliano.appturnos.activity.HomeActivity">
 
 
     <TextView

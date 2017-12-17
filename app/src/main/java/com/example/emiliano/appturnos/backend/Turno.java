@@ -1,4 +1,7 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.backend;
+
+import com.example.emiliano.appturnos.backend.Especialidad;
+import com.example.emiliano.appturnos.backend.Medico;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,11 +15,8 @@ public class Turno implements Serializable{
     private Integer id_turno;
     private Integer paciente_id;
     private Integer horario_atencion_id;
-    private Integer obra_social_id;
-    private String obra_social_nombre;
+    private Afiliacion afiliacion;
     private Medico medico;
-    //private Integer medico_especialidad_id;
-    //private String medico_especialidad_nombre;
     private Especialidad especialidad;
     private Integer sanatorio_id;
     private String sanatorio_nombre;
@@ -24,7 +24,7 @@ public class Turno implements Serializable{
     private String sanatorio_telefono;
     private Integer fecha_hora_ini;
     private Integer fecha_hora_fin;
-    private Date dia;
+    private HorarioAtencion horarioAtencion;
 
     public Turno() {
         this.especialidad = null;
@@ -55,20 +55,12 @@ public class Turno implements Serializable{
         this.horario_atencion_id = horario_atencion_id;
     }
 
-    public Integer getObraSocialId() {
-        return obra_social_id;
+    public Afiliacion getAfiliacion() {
+        return afiliacion;
     }
 
-    public void setObraSocialId(Integer obra_social_id) {
-        this.obra_social_id = obra_social_id;
-    }
-
-    public String getObraSocialNombre() {
-        return obra_social_nombre;
-    }
-
-    public void setObraSocialNombre(String obra_social_nombre) {
-        this.obra_social_nombre = obra_social_nombre;
+    public void setAfiliacion(Afiliacion afiliacion) {
+        this.afiliacion = afiliacion;
     }
 
     public Medico getMedico() {
@@ -86,23 +78,6 @@ public class Turno implements Serializable{
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
     }
-
-    /*
-    public Integer getMedicoEspecialidadId() {
-        return medico_especialidad_id;
-    }
-
-    public void setMedicoEspecialidadId(Integer medico_especialidad_id) {
-        this.medico_especialidad_id = medico_especialidad_id;
-    }
-
-    public String getMedicoEspecialidadNombre() {
-        return medico_especialidad_nombre;
-    }
-
-    public void setMedicoEspecialidadNombre(String medico_especialidad_nombre) {
-        this.medico_especialidad_nombre = medico_especialidad_nombre;
-    }*/
 
     public Integer getSanatorioId() {
         return sanatorio_id;
@@ -152,11 +127,11 @@ public class Turno implements Serializable{
         this.fecha_hora_fin = fecha_hora_fin;
     }
 
-    public Date getDia() {
-        return dia;
+    public HorarioAtencion getHorarioAtencion() {
+        return horarioAtencion;
     }
 
-    public void setDia(Date dia) {
-        this.dia = dia;
+    public void setHorarioAtencion(HorarioAtencion horarioAtencion) {
+        this.horarioAtencion = horarioAtencion;
     }
 }

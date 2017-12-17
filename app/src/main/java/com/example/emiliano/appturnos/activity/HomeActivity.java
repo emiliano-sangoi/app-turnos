@@ -1,26 +1,17 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.emiliano.appturnos.R;
+import com.example.emiliano.appturnos.backend.Usuario;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -32,9 +23,6 @@ public class HomeActivity extends AppCompatActivity {
     //Componentes visuales:
     private ScrollView misTurnosContainer;
     private TextView txtView;
-
-    //Constantes
-    private final int REQ_NUEVO_TURNO = 8;
 
 
     @Override
@@ -66,11 +54,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onNuevoTurnoClick(View view){
 
-        Intent i = new Intent(this, NuevoTurnoWizard1Activity.class);
+        Intent i = new Intent(this, Wizard1Activity.class);
         Bundle data = new Bundle();
         data.putSerializable("usuario", this.usuario);
         i.putExtras(data);
-        startActivityForResult(i, REQ_NUEVO_TURNO);
+        startActivityForResult(i, WizardActivity.REQUEST_W1);
 
     }
 
@@ -78,10 +66,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode){
-            case Activity.RESULT_OK:
+            case WizardActivity.RESULT_OK:
+                break;
+            case WizardActivity.RESULT_CREATED:
                 Toast.makeText(this, "Turno creado correctamente!!!", Toast.LENGTH_LONG).show();
-
-            case Activity.RESULT_CANCELED:
+                break;
+            case WizardActivity.RESULT_CANCELED:
                 Toast.makeText(this, "La creacion del turno ha sido cancelada.", Toast.LENGTH_LONG).show();
         }
 

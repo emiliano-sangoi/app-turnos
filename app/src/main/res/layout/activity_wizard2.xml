@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_outer_layout"
+    tools:context="com.example.emiliano.appturnos.activity.Wizard2Activity">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/w2Titulo"
+        android:textSize="@dimen/txts_titulo"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/pbProgreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scrollableContainer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTintMode="src_in"
+        android:maxHeight="@dimen/txts_4"
+        android:maxWidth="@dimen/txts_4"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/scrollableContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitulo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tvSubtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/w2Subtitulo"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubtitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/w2Desc"
+                android:textSize="@dimen/txts_default" />
+
+
+            <TextView
+                android:id="@+id/tvLabelEspecialidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitulo"
+                android:layout_marginTop="10dp"
+                android:text="Especialidad:"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerEspecialidades"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvLabelEspecialidad"
+                android:layout_marginTop="10dp" />
+
+
+            <LinearLayout
+                android:id="@+id/layoutMedicos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerEspecialidades"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLabelMedicos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/spinnerEspecialidades"
+                    android:layout_marginTop="10dp"
+                    android:text="Médico:"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/txts_4"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerMedicos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvLabelMedicos"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TableRow android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:background="@color/colorCoral"
+                android:onClick="onClickBotonCancelar"
+                android:paddingBottom="@dimen/padding_btn"
+                android:paddingTop="@dimen/padding_btn"
+                android:text="@string/txtBtnCancelar"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/txts_5" />
+
+
+            <Button
+                android:id="@+id/btnAnterior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:onClick="onClickBtnAnterior"
+                android:paddingBottom="@dimen/padding_btn"
+                android:paddingTop="@dimen/padding_btn"
+                android:text="@string/txtBtnAnterior"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/txts_5" />
+
+            <Button
+                android:id="@+id/btnSiguiente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:onClick="onClickBtnSiguiente"
+                android:paddingBottom="@dimen/padding_btn"
+                android:paddingTop="@dimen/padding_btn"
+                android:text="@string/txtBtnSiguiente"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/txts_5" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</RelativeLayout>

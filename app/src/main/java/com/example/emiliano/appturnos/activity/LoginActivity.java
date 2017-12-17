@@ -1,4 +1,4 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,10 @@ import android.widget.EditText;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.emiliano.appturnos.event.OnFinishCallback;
+import com.example.emiliano.appturnos.R;
+import com.example.emiliano.appturnos.backend.Usuario;
+import com.example.emiliano.appturnos.backend.APITurnosManager;
 
 public class LoginActivity extends Activity {
 

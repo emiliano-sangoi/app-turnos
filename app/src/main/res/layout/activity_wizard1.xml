@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_outer_layout"
+    tools:context="com.example.emiliano.appturnos.activity.Wizard1Activity">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/w1Titulo"
+        android:textSize="@dimen/txts_titulo"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/pbProgreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scrollableContainer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTintMode="src_in"
+        android:maxHeight="@dimen/txts_4"
+        android:maxWidth="@dimen/txts_4"
+        android:visibility="gone" />
+
+
+    <ScrollView
+        android:id="@+id/scrollableContainer"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tvTitulo"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tvSubtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/w1Subtitulo"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubtitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/w1Desc"
+                android:textSize="@dimen/txts_default" />
+
+
+            <Spinner
+                android:id="@+id/spinnerAfiliaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDescripcion"
+                android:layout_marginTop="10dp"
+                android:spinnerMode="dialog"
+                android:textColor="@color/colorBlack" />
+
+            <CheckBox
+                android:id="@+id/cbPagarConsulta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerAfiliaciones"
+                android:layout_marginTop="20dp"
+                android:text="Pagar consulta"
+                android:textSize="@dimen/txts_default" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TableRow android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:background="@color/colorCoral"
+                android:onClick="onClickBotonCancelar"
+                android:padding="@dimen/padding_btn"
+                android:text="@string/txtBtnCancelar"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/txts_5" />
+
+            <Button
+                android:id="@+id/btnSiguiente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:onClick="onClickBtnSiguiente"
+                android:padding="@dimen/padding_btn"
+                android:text="@string/txtBtnSiguiente"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/txts_5" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</RelativeLayout>

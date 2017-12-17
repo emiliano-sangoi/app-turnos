@@ -11,19 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".NuevoTurnoWizard1Activity" />
-        <activity android:name=".NuevoTurnoWizard2Activity" />
-        <activity android:name=".NuevoTurnoWizard3Activity" />
-        <activity android:name=".NuevoTurnoWizard4Activity" />
-        <activity android:name=".NuevoTurnoWizard5Activity"></activity>
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.Wizard1Activity" />
+        <activity android:name=".activity.Wizard2Activity" />
+        <activity android:name=".activity.Wizard3Activity" />
+        <activity android:name=".activity.Wizard4Activity"></activity>
     </application>
 
 </manifest>

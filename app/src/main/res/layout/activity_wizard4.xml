@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="@dimen/padding_outer_layout"
+tools:context="com.example.emiliano.appturnos.activity.Wizard4Activity">
+
+
+
+<TextView
+    android:id="@+id/tvTitulo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:text="@string/w4Titulo"
+    android:textSize="@dimen/txts_titulo"
+    android:textStyle="bold" />
+
+<ProgressBar
+    android:id="@+id/pbProgreso"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:indeterminateTint="@color/colorPrimaryDark"
+    android:indeterminateTintMode="src_in"
+    android:maxHeight="@dimen/txts_4"
+    android:maxWidth="@dimen/txts_4"
+    android:visibility="gone"
+    android:layout_above="@+id/scrollableContainer" />
+
+ <ScrollView
+     android:id="@+id/scrollableContainer"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_below="@+id/tvTitulo">
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical">
+
+
+         <TextView
+             android:id="@+id/tvSubtitulo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tvTitulo"
+             android:layout_marginTop="10sp"
+             android:visibility="gone"
+             android:text="@string/w4Subtitulo"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             />
+
+         <TextView
+             android:id="@+id/tvDescripcion"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tvSubtitulo"
+             android:layout_marginTop="10dp"
+             android:text="@string/w4Desc"
+             android:textSize="@dimen/txts_default" />
+
+         <!--Fecha del turno-->
+         <TextView
+             android:id="@+id/tvFechaLabel"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Fecha del turno"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="10dp"
+             android:textStyle="bold"
+             android:layout_below="@id/tvSubtitulo"/>
+
+         <TextView
+             android:id="@+id/tvFecha"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="- -"
+             android:textAlignment="center"
+             android:textColor="@color/colorPrimaryDark"
+             android:textStyle="bold"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="5sp"
+             android:layout_below="@id/tvFechaLabel"/>
+
+         <!--Clinica-->
+         <TextView
+             android:id="@+id/tvClinicaLabel"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Clinica"
+             android:textStyle="bold"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="10dp"
+             android:layout_below="@id/tvFecha"/>
+
+         <TextView
+             android:id="@+id/tvClinica"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="- -"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="5sp"
+             android:layout_below="@id/tvClinicaLabel"/>
+
+         <!--Medico-->
+         <TextView
+             android:id="@+id/tvMedicoLabel"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Médico"
+             android:textStyle="bold"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="10dp"
+             android:layout_below="@id/tvClinica"/>
+
+         <TextView
+             android:id="@+id/tvMedico"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="- -"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="5dp"
+             android:layout_below="@id/tvMedicoLabel"/>
+
+         <!--Especialidad-->
+         <TextView
+             android:id="@+id/tvEspecialidadLabel"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Especialista en:"
+             android:textStyle="bold"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="10dp"
+             android:layout_below="@id/tvMedico"/>
+
+         <TextView
+             android:id="@+id/tvEspecialidad"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="- -"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="5dp"
+             android:layout_below="@id/tvEspecialidadLabel"/>
+
+         <!--Obra social-->
+         <TextView
+             android:id="@+id/tvAfiliacionLabel"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Afiliación"
+             android:textStyle="bold"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="10dp"
+             android:layout_below="@id/tvEspecialidad"/>
+
+         <TextView
+             android:id="@+id/tvAfiliacion"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="- -"
+             android:textColor="@color/colorBlack"
+             android:textSize="@dimen/txts_4"
+             android:layout_marginTop="5dp"
+             android:layout_below="@id/tvAfiliacionLabel"/>
+
+
+     </LinearLayout>
+
+
+ </ScrollView>
+
+
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <TableRow android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:background="@color/colorCoral"
+            android:text="@string/txtBtnCancelar"
+            android:onClick="onClickBotonCancelar"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="@dimen/padding_btn"
+            android:paddingBottom="@dimen/padding_btn"
+            android:textSize="@dimen/txts_5" />
+
+
+        <Button
+            android:id="@+id/btnAnterior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/txtBtnAnterior"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="@dimen/padding_btn"
+            android:paddingBottom="@dimen/padding_btn"
+            android:onClick="onClickBtnAnterior"
+            android:textSize="@dimen/txts_5" />
+
+        <Button
+            android:id="@+id/btnFinalizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:onClick="onClickBtnFinalizar"
+            android:background="@color/colorPrimary"
+            android:text="@string/txtBtnFinalizar"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="@dimen/padding_btn"
+            android:paddingBottom="@dimen/padding_btn"
+            android:textSize="@dimen/txts_5" />
+
+    </TableRow>
+
+</TableLayout>
+
+
+</RelativeLayout>

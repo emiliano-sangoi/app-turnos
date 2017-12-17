@@ -3,11 +3,35 @@
     <string name="app_name">AppTurnos</string>
     <string name="main_menu_item_salir_label">Salir</string>
     <string name="home_no_existen_turnos">No existen turnos cargados.</string>
-    <string name="user_ej">emil34</string>
-    <string name="pwd_user_ej">917</string>
-    <string name="w_nuevo_turno_tit">Nuevo Turno</string>
-    <string name="w1_txt_desc">Seleccione la obra social con la que realizara la consulta medica. Es posible que el sanatorio no tenga convenio con esa obra social, por lo que no podrá realizar la consulta a menos que abone el monto correspondiente a la misma.</string>
+    <string name="username1">ritchie.marvin</string>
+    <string name="password1">2048</string>
+    <!--Usuario con mas de 1 afiliacion:-->
+    <string name="username2">maxwell.moen</string>
+    <string name="password2">1168</string>
+
+
+
+    <string name="wTitulo">Nuevo turno</string>
+
+    <string name="w1Titulo">Nuevo Turno</string>
+    <string name="w1Subtitulo"></string>
+    <string name="w1Desc">Seleccione la obra social con la que realizara la consulta medica.</string>
+
+    <string name="w2Titulo">Nuevo Turno</string>
+    <string name="w2Subtitulo"></string>
+    <string name="w2Desc">Seleccione la especialidad que desee y a acontinuación, seleccione un médico.</string>
+
+    <string name="w3Titulo">Nuevo Turno</string>
+    <string name="w3Subtitulo"></string>
+    <string name="w3Desc">Seleccione un horario para el turno.</string>
+
+    <string name="w4Titulo">Nuevo Turno</string>
+    <string name="w4Subtitulo"></string>
+    <string name="w4Desc">Revise los datos ingresados y a continuación presione \'Finalizar\' </string>
 
     <!--Buttons:-->
-    <string name="txtBtnCancel">Cancelar</string>
+    <string name="txtBtnSiguiente">Siguiente</string>
+    <string name="txtBtnAnterior">Anterior</string>
+    <string name="txtBtnFinalizar">Finalizar</string>
+    <string name="txtBtnCancelar">Cancelar</string>
 </resources>

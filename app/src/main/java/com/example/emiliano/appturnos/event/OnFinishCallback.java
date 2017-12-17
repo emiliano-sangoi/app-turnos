@@ -1,4 +1,4 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.event;
 
 import android.content.Context;
 import android.os.Bundle;

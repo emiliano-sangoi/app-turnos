@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="@dimen/padding_outer_layout"
+tools:context="com.example.emiliano.appturnos.activity.Wizard3Activity">
+
+
+<TextView
+    android:id="@+id/tvTitulo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:text="@string/w3Titulo"
+    android:textSize="@dimen/txts_titulo"
+    android:textStyle="bold" />
+
+<ProgressBar
+    android:id="@+id/pbProgreso"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:indeterminateTint="@color/colorPrimaryDark"
+    android:indeterminateTintMode="src_in"
+    android:maxHeight="@dimen/txts_4"
+    android:maxWidth="@dimen/txts_4"
+    android:visibility="gone"
+    android:layout_above="@+id/w3TxtSubTitulo" />
+
+    <ScrollView
+        android:id="@+id/scrollableContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitulo">
+
+
+        <LinearLayout
+            android:id="@+id/layoutHorario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/tvSubtitulo">
+
+            <TextView
+                android:id="@+id/tvSubtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitulo"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="@string/w3Subtitulo"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4" />
+
+
+            <TextView
+                android:id="@+id/tvDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubtitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/w3Desc"
+                android:textSize="@dimen/txts_default" />
+
+            <TextView
+                android:id="@+id/tvLabelFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha y hora del turno:"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFechaSel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tvLabelFecha"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:text=" - "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/txts_4"
+                android:inputType="date" />
+
+            <Button
+                android:id="@+id/btnSeleccionarFechaTurno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickCambiarFecha"
+                android:layout_below="@+id/etFecha"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/txts_5"
+                android:text="Seleccionar fecha" />
+
+            <Button
+                android:id="@+id/btnSeleccionarHoraTurno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickCambiarHora"
+                android:layout_below="@+id/btnSeleccionarFechaTurno"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/txts_5"
+                android:text="Seleccionar hora" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+<TableLayout
+    android:id="@+id/botonera"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <TableRow android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:background="@color/colorCoral"
+            android:text="@string/txtBtnCancelar"
+            android:onClick="onClickBotonCancelar"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="@dimen/padding_btn"
+            android:paddingBottom="@dimen/padding_btn"
+            android:textSize="@dimen/txts_5" />
+
+
+        <Button
+            android:id="@+id/btnAnterior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/txtBtnAnterior"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="@dimen/padding_btn"
+            android:paddingBottom="@dimen/padding_btn"
+            android:onClick="onClickBtnAnterior"
+            android:textSize="@dimen/txts_5" />
+
+        <Button
+            android:id="@+id/btnSiguiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:onClick="onClickBtnSiguiente"
+            android:background="@color/colorPrimary"
+            android:text="@string/txtBtnSiguiente"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="@dimen/padding_btn"
+            android:paddingBottom="@dimen/padding_btn"
+            android:textSize="@dimen/txts_5" />
+
+    </TableRow>
+
+</TableLayout>
+
+</RelativeLayout>

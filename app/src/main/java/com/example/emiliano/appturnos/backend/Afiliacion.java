@@ -1,5 +1,6 @@
-package com.example.emiliano.appturnos;
+package com.example.emiliano.appturnos.backend;
 
+import java.io.Serializable;
 import java.lang.ref.SoftReference;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
  * Created by emiliano on 11/07/17.
  */
 
-public class Afiliacion{
+public class Afiliacion implements Serializable {
 
     private int idOs;
     private String nombre;
