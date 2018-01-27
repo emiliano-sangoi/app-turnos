@@ -3,6 +3,7 @@ package com.example.emiliano.appturnos.backend;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -89,6 +90,10 @@ public class HorarioAtencion implements Serializable {
         return null;
     }
 
+    public Calendar getFechaHoraIniAsCalendar(){
+        return getFechaAsCalendar( getFechaHoraIniAsDate() );
+    }
+
     public void setFechaHoraIni(String fecha_hora_ini) {
         this.fecha_hora_ini = fecha_hora_ini;
     }
@@ -107,6 +112,16 @@ public class HorarioAtencion implements Serializable {
 
 
         return null;
+    }
+
+    public Calendar getFechaHoraFinAsCalendar(){
+        return getFechaAsCalendar( getFechaHoraFinAsDate() );
+    }
+
+    private Calendar getFechaAsCalendar(Date fechaAsDate){
+        Calendar fecha = Calendar.getInstance();
+        fecha.setTime( fechaAsDate );
+        return fecha;
     }
 
 

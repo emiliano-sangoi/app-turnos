@@ -5,6 +5,8 @@ import com.example.emiliano.appturnos.backend.Medico;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by emiliano on 14/07/17.
@@ -29,6 +31,13 @@ public class Turno implements Serializable{
     public Turno() {
         this.especialidad = null;
 
+    }
+
+    public Map<String, String> getParametros(){
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("paciente_id", Integer.toString(paciente_id));
+        params.put("horario_atencion_id", Integer.toString(horarioAtencion.getIdHorarioAtencion()) );
+        return params;
     }
 
     public Integer getId() {

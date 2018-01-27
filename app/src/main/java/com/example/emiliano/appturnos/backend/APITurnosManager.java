@@ -60,8 +60,8 @@ public class APITurnosManager {
         this.ultimoError = new String();
 
         //Parametros de configuracion:
-        this.host = "192.168.1.108";
-        this.port = 8000;
+        this.host = "192.168.1.104";
+        this.port = 8080;
 
         //URLs:
         EP_PACIENTES = this.getBaseUrl() + "/pacientes";
@@ -274,12 +274,12 @@ public class APITurnosManager {
 
     }
 
-    public void getHorariosPorMedicoYDia(final OnFinishCallback callback, Integer idMedico, Date dia){
+    public void getHorariosPorMedico(final OnFinishCallback callback, Integer idMedico){
 
 
-        String url = this.getBaseUrl() + "/horarios/medico/" + idMedico + "/dia/" + formatter.format(dia);
+        String url = this.getBaseUrl() + "/horarios/medico/" + idMedico;
 
-        Log.i("HORARIOS -> ", "getHorariosPorMedicoYDia() -> Obteniendo horarios de " + url);
+        Log.i("HORARIOS -> ", "getHorariosPorMedico(...) -> Obteniendo horarios de " + url);
 
         StringRequest request = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -291,11 +291,12 @@ public class APITurnosManager {
                     @Override
                     public void onResponse(String response) {
                         Gson gson = new Gson();
-                        Log.i("Horarios", response.toString());
+
+                        //Log.i("Horarios:", response.toString());
 
                         HorarioAtencion[] horariosAtencion = gson.fromJson(response.toString(), HorarioAtencion[].class);
 
-                        //Log.i("HORARIOS -> ", "getHorariosPorMedicoYDia() -> Cant. registros obtenidos: " + horariosAtencion.length);
+                        Log.i("HORARIOS -> ", "getHorariosPorMedicoYDia() -> Cant. registros obtenidos: " + horariosAtencion.length);
 
                         callback.successAction(horariosAtencion);
 

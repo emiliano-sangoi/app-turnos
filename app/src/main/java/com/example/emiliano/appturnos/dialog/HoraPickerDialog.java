@@ -29,7 +29,7 @@ public class HoraPickerDialog extends DialogFragment {
 
         final Wizard3Activity wizard3Activity = (Wizard3Activity) getActivity();
 
-        final HorarioAtencion[] horariosAtencion = wizard3Activity.getHorarios();
+        final HorarioAtencion[] horariosAtencion = wizard3Activity.getHorariosParaDiaSel();
         String[] horarios = new String[ horariosAtencion.length ];
         ArrayList<String>items = new ArrayList<>();
         for(int i=0;i<horariosAtencion.length;i++){

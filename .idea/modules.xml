@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file:///mnt/088C50BE753DA995/emiliano/code/android/curso-apps-gugler/tp-final/app/app.iml" filepath="/mnt/088C50BE753DA995/emiliano/code/android/curso-apps-gugler/tp-final/app/app.iml" />
       <module fileurl="file:///media/emi88/DATOS/emiliano/code/android/curso-apps-gugler/tp-final/app/app.iml" filepath="/media/emi88/DATOS/emiliano/code/android/curso-apps-gugler/tp-final/app/app.iml" />
+      <module fileurl="file:///mnt/088C50BE753DA995/emiliano/code/android/curso-apps-gugler/tp-final/tp-final.iml" filepath="/mnt/088C50BE753DA995/emiliano/code/android/curso-apps-gugler/tp-final/tp-final.iml" />
       <module fileurl="file:///media/emi88/DATOS/emiliano/code/android/curso-apps-gugler/tp-final/tp-final.iml" filepath="/media/emi88/DATOS/emiliano/code/android/curso-apps-gugler/tp-final/tp-final.iml" />
     </modules>
   </component>

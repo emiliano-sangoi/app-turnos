@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -35,7 +37,6 @@ public class FechaPickerDialog extends DialogFragment implements DatePickerDialo
     }
 
 
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -52,19 +53,16 @@ public class FechaPickerDialog extends DialogFragment implements DatePickerDialo
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 
-
+        formmater = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         wizard3Activity = (Wizard3Activity) getActivity();
         tvFecha = (TextView) wizard3Activity.findViewById(R.id.tvFechaSel);
-
-        Bundle bundle = getArguments();
 
         Calendar calendario = Calendar.getInstance();
         int anio = 0;
         int mes = 0;
         int dia = 0;
 
-        Date fecha = null;
-
+        Date fecha;
         try{
 
             if(tvFecha.getText().toString().length() > 0) {
@@ -83,10 +81,6 @@ public class FechaPickerDialog extends DialogFragment implements DatePickerDialo
         mes = calendario.get(Calendar.MONTH);
         dia = calendario.get(Calendar.DAY_OF_MONTH);
 
-        //Vaciar horarios
-
-
-
         // Devolver un nuevo objeto de tipo DatePickerDialog
         return new DatePickerDialog(getActivity(), this, anio, mes, dia);
 
@@ -97,7 +91,7 @@ public class FechaPickerDialog extends DialogFragment implements DatePickerDialo
         //super.onDismiss(dialog);
         super.onDismiss(dialog);
         if (wizard3Activity instanceof DialogInterface.OnDismissListener) {
-            wizard3Activity.onDismissFechaPicker();
+            //wizard3Activity.onDismissFechaPicker();
             wizard3Activity.onDismiss(dialog);
         }
     }
