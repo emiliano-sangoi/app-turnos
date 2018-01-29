@@ -51,6 +51,17 @@ public class Wizard4Activity extends WizardActivity {
     }
 
     /**
+     * Este metodo verifica que un turno sea valido.
+     */
+    public void validarTurno(){
+
+
+        // el turno solo se podra guardar si fue reservado n minutos antes
+
+
+    }
+
+    /**
      * Carga los valores seteados en el formulario en la interfaz grafica.
      */
     private void cargarUI(){
@@ -77,9 +88,6 @@ public class Wizard4Activity extends WizardActivity {
         }else{
             tvAfiliacion.setText( "Particular ($250) " );
         }
-
-
-
 
     }
 

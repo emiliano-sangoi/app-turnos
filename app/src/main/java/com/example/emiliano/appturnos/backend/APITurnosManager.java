@@ -10,11 +10,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.emiliano.appturnos.event.OnFinishCallback;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,11 +42,13 @@ public class APITurnosManager {
     private String EP_OBRAS_SOCIALES;
     private String EP_ESPECIALIDADES;
     private String EP_MEDICOS;
+    private String EP_TURNOS;
 
     private RequestQueue requestQueue;
     private Usuario usuario;
     private String ultimoError;
     private SimpleDateFormat formatter;
+    private JsonParser jsonParser;
 
     /**
      * Constructor
@@ -67,12 +73,30 @@ public class APITurnosManager {
         EP_PACIENTES = this.getBaseUrl() + "/pacientes";
         EP_LOGIN = this.getBaseUrl() + "/login";
         EP_OBRAS_SOCIALES = this.getBaseUrl() + "/os";
-        EP_ESPECIALIDADES = this.getBaseUrl() + "/especialidades";
+        EP_ESPECIALIDADES = this.getBaseUrl() + "/especialidades/";
         EP_MEDICOS = this.getBaseUrl() + "/medicos";
+        EP_TURNOS = this.getBaseUrl() + "/turno";
 
         this.formatter = new SimpleDateFormat("yMMdd");
 
+        this.jsonParser = new JsonParser();
 
+    }
+
+    private JsonArray parseData(String response){
+        JsonElement jsonElement = jsonParser.parse( response.toString() );
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
+
+        return jsonArray;
+    }
+
+    private JsonElement parseMsg(String response){
+        JsonElement jsonElement = jsonParser.parse( response.toString() );
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        JsonElement msgJsonObject = jsonObject.get("msg");
+
+        return msgJsonObject;
     }
 
 
@@ -102,12 +126,14 @@ public class APITurnosManager {
 
                             Gson gson = new Gson();
 
-                            usuario = gson.fromJson(response.toString(), Usuario.class);
+                            JsonArray jsonArray = parseData( response.toString() );
+                            String jsonUsuario = jsonArray.get(0).getAsJsonObject().toString();
+
+                            usuario = gson.fromJson( jsonUsuario , Usuario.class);
 
                             callback.successAction(usuario);
 
                             Log.i("USUARIO: ", response.toString());
-                            //Log.i("ES PACIENTE: ", usuario.esPaciente() ? "Si" : "No");
 
                     }
 
@@ -138,14 +164,61 @@ public class APITurnosManager {
                 }
         );
 
+        this.requestQueue.add(request);
 
+    }
 
-       //StringRequest request = new StringRequest(Request.Method.POST, EP_LOGIN, onLoginSuccess, onLoginError) {
+    public void nuevoTurno(final OnFinishCallback callback, Turno turno) {
 
+        this.ultimoError = "";
 
-        //Log.i("HTTP METHOD", "" + request.getErrorListener()..getMethod());
+        Map<String, String> params = turno.getHttpPostParams();
+
+        Log.i("EP TURNO",  EP_TURNOS);
+
+        JsonObjectRequest request = new JsonObjectRequest(EP_TURNOS, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Gson gson = new Gson();
+
+                        Turno turnoCreado = gson.fromJson(response.toString(), Turno.class);
+
+                        callback.successAction(turnoCreado);
+
+                        Log.i("TURNO CREADO: ", response.toString());
+
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        try{
+                            switch (error.networkResponse.statusCode) {
+                                default:
+                                    callback.showToast("Ocurrio un error al intentar guardar el turno.");
+                                    ultimoError = error.toString();
+                                    Log.e("TURNO | ERROR:", error.toString());
+                            }
+
+                        }catch (NullPointerException e){
+                            callback.showToast("Ocurrio un error al intentar guardar el turno. Probablemente el servidor no se encuentre funcionando correctamente.");
+                            e.printStackTrace();
+                            Log.d("ERROR", e.getMessage());
+                        }
+
+                    }
+
+                }
+        );
 
         this.requestQueue.add(request);
+
+
 
     }
 
@@ -164,7 +237,11 @@ public class APITurnosManager {
                     @Override
                     public void onResponse(String response) {
                         Gson gson = new Gson();
-                        Afiliacion[] afiliaciones = gson.fromJson(response.toString(), Afiliacion[].class);
+
+                        JsonArray jsonArray = parseData(response);
+                        String jsonAfiliaciones = jsonArray.toString();
+
+                        Afiliacion[] afiliaciones = gson.fromJson( jsonAfiliaciones, Afiliacion[].class);
 
                         Log.i("AFILIACION", "" + afiliaciones.length);
 
@@ -205,7 +282,11 @@ public class APITurnosManager {
                     @Override
                     public void onResponse(String response) {
                         Gson gson = new Gson();
-                        Especialidad[] especialidades = gson.fromJson(response.toString(), Especialidad[].class);
+
+                        JsonArray jsonArray = parseData(response);
+                        String jsonEspecialidades = jsonArray.toString();
+
+                        Especialidad[] especialidades = gson.fromJson(jsonEspecialidades, Especialidad[].class);
 
                         //Log.i("ESPECIALIDADES", especialidades.length + "");
                         Log.i("ESPECIALIDADES", response.toString());
@@ -246,10 +327,13 @@ public class APITurnosManager {
                     @Override
                     public void onResponse(String response) {
                         Gson gson = new Gson();
-                        Medico[] medicos = gson.fromJson(response.toString(), Medico[].class);
+
+                        JsonArray jsonArray = parseData(response);
+                        String jsonMedicos = jsonArray.toString();
+
+                        Medico[] medicos = gson.fromJson(jsonMedicos, Medico[].class);
 
                         Log.i("MEDICOS -> size = ", medicos.length + "");
-                        //Log.i("MEDICOS ->", response.toString());
 
                         callback.successAction(medicos);
 
@@ -292,9 +376,10 @@ public class APITurnosManager {
                     public void onResponse(String response) {
                         Gson gson = new Gson();
 
-                        //Log.i("Horarios:", response.toString());
+                        JsonArray jsonArray = parseData(response);
+                        String jsonHorarios = jsonArray.toString();
 
-                        HorarioAtencion[] horariosAtencion = gson.fromJson(response.toString(), HorarioAtencion[].class);
+                        HorarioAtencion[] horariosAtencion = gson.fromJson(jsonHorarios, HorarioAtencion[].class);
 
                         Log.i("HORARIOS -> ", "getHorariosPorMedicoYDia() -> Cant. registros obtenidos: " + horariosAtencion.length);
 

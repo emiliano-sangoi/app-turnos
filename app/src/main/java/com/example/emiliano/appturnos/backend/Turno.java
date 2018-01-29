@@ -40,6 +40,16 @@ public class Turno implements Serializable{
         return params;
     }
 
+
+    public Map<String, String> getHttpPostParams(){
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("paciente_id", Integer.toString(paciente_id));
+        params.put("obra_social_id", Integer.toString(afiliacion.getIdOs()));
+        params.put("horario_atencion_id", Integer.toString(horario_atencion_id));
+
+        return params;
+    }
+
     public Integer getId() {
         return id_turno;
     }
@@ -143,4 +153,5 @@ public class Turno implements Serializable{
     public void setHorarioAtencion(HorarioAtencion horarioAtencion) {
         this.horarioAtencion = horarioAtencion;
     }
+
 }
