@@ -32,6 +32,7 @@ public class Wizard1Activity extends WizardActivity {
         setContentView(R.layout.activity_wizard1);
 
         this.turno = new Turno();
+        this.turno.setUsuario(this.usuario);
 
         this.wAnterior = null;
         this.wSiguiente = Wizard2Activity.class;

@@ -39,8 +39,8 @@ public class OnFinishCallback {
     /**
      * Se debe ejecutar en caso de que haya algun error
      */
-    public void errorAction(){
-        return;
+    public void errorAction(String msg){
+        showToast(msg);
     }
 
     public Context getContext() {

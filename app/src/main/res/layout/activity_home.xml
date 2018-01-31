@@ -7,85 +7,72 @@
     android:padding="@dimen/padding_outer_layout"
     tools:context="com.example.emiliano.appturnos.activity.HomeActivity">
 
-
-    <TextView
-        android:id="@+id/homeTxtTitulo"
+    <RelativeLayout
+        android:id="@+id/layoutTitulo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Mis Turnos"
-        android:textAlignment="center"
-        android:textSize="@dimen/txts_titulo" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/homeTxtTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/pbProgreso"
+            android:layout_alignParentTop="true"
+            android:text="Mis Turnos"
+            android:textAlignment="center"
+            android:textSize="@dimen/txts_titulo"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/pbProgreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:indeterminateTintMode="src_in"
+            android:maxHeight="@dimen/txts_titulo"
+            android:maxWidth="@dimen/txts_titulo"
+            android:paddingRight="5dp"
+            android:visibility="visible" />
+
+    </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/misTurnosContainer"
+        android:id="@+id/scrollableContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/homeTxtTitulo"
-        android:visibility="gone"
-        android:layout_marginTop="20dp">
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnNuevoTurno"
+        android:layout_below="@+id/layoutTitulo"
+        android:fillViewport="true">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/home_no_existen_turnos"
+                android:textSize="@dimen/txts_default"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/listadoTurnos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+            </ListView>
+
+
+        </LinearLayout>
+
+
     </ScrollView>
-
-    <TextView
-        android:id="@+id/txtMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/txts_default"
-        android:layout_marginTop="20dp"
-        android:text="@string/home_no_existen_turnos"
-        android:layout_below="@+id/homeTxtTitulo"
-        />
-
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnNuevoTurno">
-
-        <TableRow
-            android:layout_width="match_parent">
-
-            <Button
-                android:id="@+id/btnConsultarInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Más Info"
-                android:padding="@dimen/padding_btn"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/txts_5" />
-
-
-            <Button
-                android:id="@+id/btnDarDeBaja"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:layout_weight="1"
-                android:layout_marginLeft="15dp"
-                android:background="@color/colorCoral"
-                android:padding="@dimen/padding_btn"
-                android:text="Dar de Baja"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/txts_5"
-
-
-                />
-
-        </TableRow>
-
-
-    </TableLayout>
-
 
     <Button
         android:id="@+id/btnNuevoTurno"
@@ -93,12 +80,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="15dp"
-        android:padding="@dimen/padding_btn"
         android:background="@color/colorPrimary"
+        android:onClick="onNuevoTurnoClick"
+        android:padding="@dimen/padding_btn"
         android:text="Nuevo Turno"
         android:textColor="@color/colorWhite"
-        android:onClick="onNuevoTurnoClick"
         android:textSize="@dimen/txts_5" />
 
 
 </RelativeLayout>
+

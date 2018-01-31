@@ -15,37 +15,31 @@ import java.util.Map;
 public class Turno implements Serializable{
 
     private Integer id_turno;
-    private Integer paciente_id;
-    private Integer horario_atencion_id;
+    private Usuario usuario;
     private Afiliacion afiliacion;
     private Medico medico;
     private Especialidad especialidad;
+    private HorarioAtencion horarioAtencion;
+
     private Integer sanatorio_id;
     private String sanatorio_nombre;
     private String sanatorio_direccion;
     private String sanatorio_telefono;
     private Integer fecha_hora_ini;
     private Integer fecha_hora_fin;
-    private HorarioAtencion horarioAtencion;
 
     public Turno() {
         this.especialidad = null;
 
     }
 
-    public Map<String, String> getParametros(){
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("paciente_id", Integer.toString(paciente_id));
-        params.put("horario_atencion_id", Integer.toString(horarioAtencion.getIdHorarioAtencion()) );
-        return params;
-    }
-
 
     public Map<String, String> getHttpPostParams(){
         Map<String, String> params = new HashMap<String, String>();
-        params.put("paciente_id", Integer.toString(paciente_id));
-        params.put("obra_social_id", Integer.toString(afiliacion.getIdOs()));
-        params.put("horario_atencion_id", Integer.toString(horario_atencion_id));
+
+        params.put("paciente_id", Integer.toString(usuario.getIdPaciente()));
+        params.put("obra_social_id", afiliacion != null ? Integer.toString(afiliacion.getIdOs()) : null);
+        params.put("horario_atencion_id", Integer.toString(horarioAtencion.getIdHorarioAtencion()));
 
         return params;
     }
@@ -56,22 +50,6 @@ public class Turno implements Serializable{
 
     public void setId(Integer id_turno) {
         this.id_turno = id_turno;
-    }
-
-    public Integer getPacienteId() {
-        return paciente_id;
-    }
-
-    public void setPacienteId(Integer paciente_id) {
-        this.paciente_id = paciente_id;
-    }
-
-    public Integer getHorarioAtencionId() {
-        return horario_atencion_id;
-    }
-
-    public void setHorarioAtencionId(Integer horario_atencion_id) {
-        this.horario_atencion_id = horario_atencion_id;
     }
 
     public Afiliacion getAfiliacion() {
@@ -154,4 +132,12 @@ public class Turno implements Serializable{
         this.horarioAtencion = horarioAtencion;
     }
 
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

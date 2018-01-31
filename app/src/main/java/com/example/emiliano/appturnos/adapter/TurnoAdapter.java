@@ -1,7 +1,6 @@
-package apps.sangoi.emiliano.app_pronosticos.adapter;
+package com.example.emiliano.appturnos.adapter;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,43 +8,47 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.emiliano.appturnos.R;
+import com.example.emiliano.appturnos.backend.Turno;
 
 import java.util.ArrayList;
-
-import apps.sangoi.emiliano.app_pronosticos.R;
-import apps.sangoi.emiliano.app_pronosticos.database.Ubicacion;
 
 /**
  * Created by emi88 on 10/28/17.
  */
 
-public class UbicacionAdapter extends ArrayAdapter<Ubicacion> {
+public class TurnoAdapter extends ArrayAdapter<Turno> {
 
-    private ArrayList<Ubicacion>ubicaciones;
+    private ArrayList<Turno> turnos;
 
-    public UbicacionAdapter(Context context, ArrayList<Ubicacion> ubicaciones) {
-        super(context, 0, ubicaciones);
-        this.ubicaciones = ubicaciones;
+    public TurnoAdapter(Context context, ArrayList<Turno> turnos) {
+        super(context, 0, turnos);
+        this.turnos = turnos;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        Ubicacion ubicacion = getItem(position);
+        Turno turno = getItem(position);
 
         // si no se reusa la vista, inflar:
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_ubicacion, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_turno, parent, false);
         }
 
         // actualizar elementos visuales:
         TextView tvTitulo = (TextView) convertView.findViewById(R.id.tvTitulo);
-        tvTitulo.setText( ubicacion.getTitulo() );
+        if(turno.getAfiliacion() != null){
+            tvTitulo.setText( turno.getAfiliacion().getFechaIni() );
+        }else{
+            tvTitulo.setText( "Sin obra social." );
+        }
 
+/*
         TextView tvDescripcion = (TextView) convertView.findViewById(R.id.tvDescripcion);
-        tvDescripcion.setText( ubicacion.getDescripcion() );
+        tvDescripcion.setText( turno.getDescripcion() );*/
 
         return convertView;
 
@@ -53,6 +56,6 @@ public class UbicacionAdapter extends ArrayAdapter<Ubicacion> {
 
     @Override
     public int getCount() {
-        return this.ubicaciones.size();
+        return this.turnos.size();
     }
 }

@@ -12,7 +12,6 @@ public class Especialidad implements Serializable{
 
     private String nom_especialidad;
 
-
     private transient String desc_especialidad;
 
     public Especialidad(Integer id_especialidad, String nom_especialidad, String desc_especialidad) {

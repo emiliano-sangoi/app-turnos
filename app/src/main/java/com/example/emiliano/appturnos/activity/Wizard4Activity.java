@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.emiliano.appturnos.R;
+import com.example.emiliano.appturnos.event.OnFinishCallback;
 
 public class Wizard4Activity extends WizardActivity {
 
@@ -43,11 +44,37 @@ public class Wizard4Activity extends WizardActivity {
         tvAfiliacion = (TextView) findViewById(R.id.tvAfiliacion);
         tvClinica = (TextView) findViewById(R.id.tvClinica);
 
+        hideProgressBar();
+
     }
 
     @Override
     public void onClickBtnFinalizar(View view) {
-        mostrarToast("No implementado");
+
+
+
+        OnFinishCallback onFinishCallback = new OnFinishCallback(this){
+
+            @Override
+            public void successAction(Object data) {
+                super.successAction(data);
+                hideProgressBar();
+
+                //Redireccionar al listado...
+
+                showToast("Registro creado!!!");
+            }
+
+            @Override
+            public void errorAction(String msg) {
+                super.errorAction(msg);
+                hideProgressBar();
+            }
+        };
+
+        showProgressBar();
+        this.apiTurnos.nuevoTurno(onFinishCallback, this.turno);
+
     }
 
     /**

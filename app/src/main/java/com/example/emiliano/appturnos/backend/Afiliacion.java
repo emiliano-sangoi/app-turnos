@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Afiliacion implements Serializable {
 
+
     private int idOs;
     private String nombre;
     private String codOs;

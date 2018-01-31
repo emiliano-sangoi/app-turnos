@@ -241,5 +241,13 @@ public abstract class WizardActivity extends AppCompatActivity {
         return getString(R.string.wTitulo) +  " (" + pasoActual + "/" + totalPasos + ")";
     }
 
+    public void showProgressBar(){
+        this.pbProgreso.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar(){
+        this.pbProgreso.setVisibility(View.GONE);
+    }
+
     /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FIN GETTERS & SETTERS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 }

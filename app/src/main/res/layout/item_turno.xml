@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvFechaHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dfdfdfdfd"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/txts_3"/>
+
+    <TextView
+        android:id="@+id/tvTiempoRestante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ddddd"
+        android:textStyle="bold"
+        android:textAlignment="textEnd"
+        android:paddingTop="2sp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txts_4"/>
+</LinearLayout>

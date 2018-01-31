@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by emi88 on 12/12/17.
@@ -92,6 +93,31 @@ public class HorarioAtencion implements Serializable {
 
     public Calendar getFechaHoraIniAsCalendar(){
         return getFechaAsCalendar( getFechaHoraIniAsDate() );
+    }
+
+    public String getTiempoRestante(){
+
+
+        Calendar calendarNow = Calendar.getInstance();
+        Calendar horaIniCalendar = getFechaHoraIniAsCalendar();
+
+        long dif = calendarNow.getTimeInMillis() - horaIniCalendar.getTimeInMillis();
+        if(dif <= 0){
+            return "Finalizado";
+        }
+
+        long difDias = TimeUnit.MILLISECONDS.toDays( dif );
+        long difHoras = TimeUnit.MILLISECONDS.toHours( dif );
+        long difMinutos = TimeUnit.MILLISECONDS.toMinutes( dif );
+
+        if(difMinutos < 60){
+            return "En " + Long.toString(difMinutos) + " min.";
+        }else if(difDias > 1 && difDias < 100 ){
+            return "En " + Long.toString(difDias) + " dias.";
+        }else{
+            return "En " + Long.toString(difHoras) + " horas.";
+        }
+
     }
 
     public void setFechaHoraIni(String fecha_hora_ini) {

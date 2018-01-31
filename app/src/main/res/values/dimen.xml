@@ -13,7 +13,7 @@
 
     <!--Margins & Paddings-->
     <dimen name="padding_outer_layout">15dp</dimen>
-    <dimen name="padding_btn">15dp</dimen>
+    <dimen name="padding_btn">12dp</dimen>
 
 
 

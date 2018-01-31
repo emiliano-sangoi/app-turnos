@@ -130,7 +130,7 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
 
     public void getHorariosPorMedico(){
 
-        this.pbProgreso.setVisibility(View.VISIBLE);
+        showProgressBar();
 
         OnFinishCallback callback = new OnFinishCallback(this) {
 
@@ -149,7 +149,7 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
                 }
 
                 //Ocultar la barra de progreso:
-                pbProgreso.setVisibility(View.GONE);
+                hideProgressBar();
 
             }
         };

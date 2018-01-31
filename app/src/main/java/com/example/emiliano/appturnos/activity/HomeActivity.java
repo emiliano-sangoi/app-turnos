@@ -6,12 +6,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.example.emiliano.appturnos.R;
+import com.example.emiliano.appturnos.adapter.TurnoAdapter;
+import com.example.emiliano.appturnos.backend.APITurnosManager;
+import com.example.emiliano.appturnos.backend.Turno;
 import com.example.emiliano.appturnos.backend.Usuario;
+import com.example.emiliano.appturnos.event.OnFinishCallback;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,8 +33,13 @@ public class HomeActivity extends AppCompatActivity {
     private Usuario usuario;
 
     //Componentes visuales:
-    private ScrollView misTurnosContainer;
-    private TextView txtView;
+    private ListView listViewMisTurnos;
+    private ListAdapter listViewMisTurnosAdapter;
+    private TextView txtMsg;
+    private ProgressBar pbProgreso;
+    private ArrayList<Turno> misTurnos;
+    private TurnoAdapter turnoAdapter;
+    private APITurnosManager apiTurnos;
 
 
     @Override
@@ -43,12 +60,87 @@ public class HomeActivity extends AppCompatActivity {
             //Toast.makeText(this,"ES PACIENTE: " + (usuario.esPaciente() ? "Si" : "No"), Toast.LENGTH_LONG).show();
         }
 
+        RequestQueue rq = Volley.newRequestQueue(this);
+        this.apiTurnos = new APITurnosManager(rq);
 
+        initUI();
+
+        getTurnos();
+
+    }
+
+    public void initUI(){
 
         //Componentes visuales:
-        this.misTurnosContainer = (ScrollView) findViewById(R.id.misTurnosContainer);
-        this.txtView = (TextView) findViewById(R.id.txtMsg);
-        //this.txtView.setText(usuario.getNombres() + ", " + usuario.getApellidos());
+        this.listViewMisTurnos = (ListView) findViewById(R.id.listadoTurnos);
+        this.txtMsg = (TextView) findViewById(R.id.txtMsg);
+        pbProgreso = (ProgressBar) findViewById(R.id.pbProgreso);
+
+        if(misTurnos  == null || misTurnos.size() ==  0){
+            this.listViewMisTurnos.setVisibility(ListView.GONE);
+            this.txtMsg.setVisibility(TextView.VISIBLE);
+        }
+
+    }
+
+    public void getTurnos(){
+
+        OnFinishCallback callback = new OnFinishCallback(this) {
+
+            /**
+             * Actualiza la vista. En data se encuentra el objeto con los datos, normalmente traidos del modelo.
+             *
+             * @param data
+             */
+            @Override
+            public void successAction(Object[] data) {
+
+                hideProgressBar();
+
+                //guardar afiliaciones
+                Turno[] turnos = (Turno[]) data;
+                misTurnos = new ArrayList<Turno>(Arrays.asList(turnos));
+
+                actualizarListadoTurnos();
+
+            }
+
+            @Override
+            public void errorAction(String msg) {
+                super.errorAction(msg);
+                hideProgressBar();
+            }
+        };
+
+        showProgressBar();
+        this.apiTurnos.getTurnosPorPaciente(callback, usuario.getIdPaciente());
+
+    }
+
+    public void actualizarListadoTurnos(){
+
+        if(misTurnos.size() > 0){
+            this.listViewMisTurnos.setVisibility(ListView.VISIBLE);
+            this.txtMsg.setVisibility(TextView.GONE);
+        }else{
+            this.listViewMisTurnos.setVisibility(ListView.GONE);
+            this.txtMsg.setVisibility(TextView.VISIBLE);
+        }
+
+        if(turnoAdapter == null){
+
+            this.turnoAdapter = new TurnoAdapter(this, this.misTurnos);
+            this.listViewMisTurnos.setAdapter( this.turnoAdapter );
+            return;
+
+        }
+
+        //Obtener
+        turnoAdapter.clear();
+        turnoAdapter.addAll( this.misTurnos );
+
+        //Actualizar adapter
+        turnoAdapter.notifyDataSetChanged();
 
     }
 
@@ -100,4 +192,13 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         return;
     }
+
+    public void showProgressBar(){
+        this.pbProgreso.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar(){
+        this.pbProgreso.setVisibility(View.GONE);
+    }
+
 }
