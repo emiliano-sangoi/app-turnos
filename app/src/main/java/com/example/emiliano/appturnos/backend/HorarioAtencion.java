@@ -95,29 +95,18 @@ public class HorarioAtencion implements Serializable {
         return getFechaAsCalendar( getFechaHoraIniAsDate() );
     }
 
-    public String getTiempoRestante(){
-
-
+    /**
+     * Devuelve el tiempo restante que falta para el turno.
+     *
+     * @return
+     */
+    public Long getTiempoRestanteEnMilis(){
         Calendar calendarNow = Calendar.getInstance();
         Calendar horaIniCalendar = getFechaHoraIniAsCalendar();
 
-        long dif = calendarNow.getTimeInMillis() - horaIniCalendar.getTimeInMillis();
-        if(dif <= 0){
-            return "Finalizado";
-        }
+        long dif = horaIniCalendar.getTimeInMillis() - calendarNow.getTimeInMillis();
 
-        long difDias = TimeUnit.MILLISECONDS.toDays( dif );
-        long difHoras = TimeUnit.MILLISECONDS.toHours( dif );
-        long difMinutos = TimeUnit.MILLISECONDS.toMinutes( dif );
-
-        if(difMinutos < 60){
-            return "En " + Long.toString(difMinutos) + " min.";
-        }else if(difDias > 1 && difDias < 100 ){
-            return "En " + Long.toString(difDias) + " dias.";
-        }else{
-            return "En " + Long.toString(difHoras) + " horas.";
-        }
-
+        return new Long(dif);
     }
 
     public void setFechaHoraIni(String fecha_hora_ini) {

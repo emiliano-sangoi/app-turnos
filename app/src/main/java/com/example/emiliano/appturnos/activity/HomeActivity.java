@@ -1,11 +1,14 @@
 package com.example.emiliano.appturnos.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -20,6 +23,7 @@ import com.example.emiliano.appturnos.adapter.TurnoAdapter;
 import com.example.emiliano.appturnos.backend.APITurnosManager;
 import com.example.emiliano.appturnos.backend.Turno;
 import com.example.emiliano.appturnos.backend.Usuario;
+import com.example.emiliano.appturnos.dialog.TurnoDialog;
 import com.example.emiliano.appturnos.event.OnFinishCallback;
 
 import java.util.ArrayList;
@@ -83,6 +87,8 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
     public void getTurnos(){
 
         OnFinishCallback callback = new OnFinishCallback(this) {
@@ -131,6 +137,7 @@ public class HomeActivity extends AppCompatActivity {
 
             this.turnoAdapter = new TurnoAdapter(this, this.misTurnos);
             this.listViewMisTurnos.setAdapter( this.turnoAdapter );
+            this.listViewMisTurnos.setOnItemClickListener(new OnTurnoItemClick(this));
             return;
 
         }
@@ -199,6 +206,37 @@ public class HomeActivity extends AppCompatActivity {
 
     public void hideProgressBar(){
         this.pbProgreso.setVisibility(View.GONE);
+    }
+
+
+
+    /**
+     * Evento que se ejecuta al hacer tap sobre una ubicacion del listado
+     */
+    private class OnTurnoItemClick implements AdapterView.OnItemClickListener {
+
+        private AppCompatActivity context;
+
+        public OnTurnoItemClick(AppCompatActivity context) {
+
+            this.context = context;
+
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            //Obtener la ubicacion clickeada:
+            Turno turno = (Turno) adapterView.getItemAtPosition(i);
+
+            //instanciar un cuadro de dialogo que muestra info de un turno:
+            TurnoDialog turnoDialog = new TurnoDialog();
+            turnoDialog.show( context.getFragmentManager(), "TurnoInfo");
+
+        }
+
+
+
     }
 
 }

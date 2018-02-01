@@ -34,4 +34,9 @@
     <string name="txtBtnAnterior">Anterior</string>
     <string name="txtBtnFinalizar">Finalizar</string>
     <string name="txtBtnCancelar">Cancelar</string>
+
+    <!--Dialog turno-->
+    <string name="dialog_turno_titulo">Más Info</string>
+    <string name="dialog_turno_tvFechaLabel_text">Fecha del turno:</string>
+    <string name="dialog_turno_text_default">-</string>
 </resources>

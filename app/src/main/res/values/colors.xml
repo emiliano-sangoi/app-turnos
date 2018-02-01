@@ -17,5 +17,10 @@
     <color name="ivoryBlack">#1D2731</color>
     <color name="colorCoral">#FF533D</color>
 
+    <color name="colorWarning">#f0ad4e</color>
+    <color name="colorDanger">#bb2124</color>
+    <color name="colorSuccess">#22bb33</color>
+    <color name="colorInfo">#5bc0de</color>
+
 
 </resources>

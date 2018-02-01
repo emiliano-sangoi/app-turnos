@@ -1,5 +1,7 @@
 package com.example.emiliano.appturnos.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -52,7 +54,7 @@ public class Wizard4Activity extends WizardActivity {
     public void onClickBtnFinalizar(View view) {
 
 
-
+        final Context self = this;
         OnFinishCallback onFinishCallback = new OnFinishCallback(this){
 
             @Override
@@ -60,9 +62,12 @@ public class Wizard4Activity extends WizardActivity {
                 super.successAction(data);
                 hideProgressBar();
 
-                //Redireccionar al listado...
-
                 showToast("Registro creado!!!");
+
+                //Redireccionar al listado...
+                Intent intent = new Intent(self, HomeActivity.class);
+                startActivity(intent);
+
             }
 
             @Override

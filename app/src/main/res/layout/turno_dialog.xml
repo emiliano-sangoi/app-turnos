@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15sp">
+
+
+    <TextView
+        android:id="@+id/turnoTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/dialog_turno_titulo"
+        android:textAlignment="center"
+        android:textSize="@dimen/txts_titulo"
+        android:textStyle="bold" />
+
+
+    <View
+        android:id="@+id/vDialogHr"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/turnoTitulo"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:background="@color/colorPrimaryDark" />
+
+    <ScrollView
+        android:id="@+id/scrollableContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_above="@+id/btnDarDeBaja"
+        android:layout_below="@+id/vDialogHr">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Fecha del turno-->
+            <TextView
+                android:id="@+id/tvFechaLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSubtitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/dialog_turno_tvFechaLabel_text"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/tvFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvFechaLabel"
+                android:layout_marginTop="5sp"
+                android:text="@string/dialog_turno_text_default"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <!--Clinica-->
+            <TextView
+                android:id="@+id/tvClinicaLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvFecha"
+                android:layout_marginTop="10dp"
+                android:text="Clinica"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvClinica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvClinicaLabel"
+                android:layout_marginTop="5sp"
+                android:text="@string/dialog_turno_text_default"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
+            <!--Medico-->
+            <TextView
+                android:id="@+id/tvMedicoLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvClinica"
+                android:layout_marginTop="10dp"
+                android:text="Médico"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMedicoLabel"
+                android:layout_marginTop="5dp"
+                android:text="@string/dialog_turno_text_default"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
+            <!--Especialidad-->
+            <TextView
+                android:id="@+id/tvEspecialidadLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMedico"
+                android:layout_marginTop="10dp"
+                android:text="Especialista en:"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvEspecialidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvEspecialidadLabel"
+                android:layout_marginTop="5dp"
+                android:text="@string/dialog_turno_text_default"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
+            <!--Obra social-->
+            <TextView
+                android:id="@+id/tvAfiliacionLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvEspecialidad"
+                android:layout_marginTop="10dp"
+                android:text="Afiliación"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvAfiliacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAfiliacionLabel"
+                android:layout_marginTop="5dp"
+                android:text="@string/dialog_turno_text_default"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+    <Button
+        android:id="@+id/btnDarDeBaja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:layout_above="@+id/btnDialogCerrar"
+        android:text="Dar de baja"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txts_5" />
+
+    <Button
+        android:id="@+id/btnDialogCerrar"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:text="Cerrar"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txts_5" />
+
+
+
+
+
+</RelativeLayout>
