@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arreglo_criterios">
+        <item>@string/orden_fecha_turno</item>
+        <item>@string/orden_cancelados</item>
+        <item>@string/orden_finalizados</item>
+    </string-array>
+
+    <string-array name="criterios_orden_valores">
+        <item>@string/orden_fecha_turno_code</item>
+        <item>@string/orden_cancelados_code</item>
+        <item>@string/orden_finalizados_code</item>
+    </string-array>
+
+    <string-array name="arreglo_visibilidad">
+        <item>@string/visibilidad_solo_vig</item>
+        <item>@string/visibilidad_no_vig</item>
+        <item>@string/visibilidad_todos</item>
+    </string-array>
+
+    <string-array name="visibilidad_valores">
+        <item>@string/visibilidad_solo_vig_code</item>
+        <item>@string/visibilidad_no_vig_code</item>
+        <item>@string/visibilidad_todos_code</item>
+    </string-array>
+
+
+</resources>

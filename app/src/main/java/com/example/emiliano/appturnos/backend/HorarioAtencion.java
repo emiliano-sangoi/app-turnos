@@ -109,6 +109,16 @@ public class HorarioAtencion implements Serializable {
         return new Long(dif);
     }
 
+    public Long getTiempoRestanteEnDias(){
+        Calendar calendarNow = Calendar.getInstance();
+        Calendar horaIniCalendar = getFechaHoraIniAsCalendar();
+
+        long dif = horaIniCalendar.getTimeInMillis() - calendarNow.getTimeInMillis();
+        long difDias = TimeUnit.MILLISECONDS.toDays( dif );
+
+        return difDias;
+    }
+
     public void setFechaHoraIni(String fecha_hora_ini) {
         this.fecha_hora_ini = fecha_hora_ini;
     }

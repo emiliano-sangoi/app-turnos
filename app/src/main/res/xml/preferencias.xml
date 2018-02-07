@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="Listado de turnos" >
+
+    <ListPreference
+        android:key="codigoVisualizacion"
+        android:title="Visualización"
+        android:summary="Seleccione que turnos visualizar y cuales no."
+        android:dialogTitle="Seleccione una opción"
+        android:entries="@array/arreglo_visibilidad"
+        android:defaultValue="@string/visibilidad_todos_code"
+        android:entryValues="@array/visibilidad_valores"
+    />
+
+    <ListPreference
+        android:key="codigoOrden"
+        android:title="Orden"
+        android:summary="Seleccione un orden para el listado de turnos."
+        android:dialogTitle="Seleccione una opción"
+        android:defaultValue="@string/orden_fecha_turno_code"
+        android:entries="@array/arreglo_criterios"
+        android:entryValues="@array/criterios_orden_valores"
+    />
+
+</PreferenceCategory>
+
+</PreferenceScreen>

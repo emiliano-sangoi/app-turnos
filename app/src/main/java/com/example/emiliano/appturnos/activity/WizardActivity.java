@@ -130,6 +130,14 @@ public abstract class WizardActivity extends AppCompatActivity {
     /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< OVERRIDE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
     @Override
+    public void startActivity(Intent intent) {
+        Bundle data = new Bundle();
+        data.putSerializable("turno", this.turno);
+        intent.putExtras(data);
+        super.startActivity(intent);
+    }
+
+    @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
     }

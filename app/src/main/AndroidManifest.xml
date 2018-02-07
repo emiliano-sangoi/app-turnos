@@ -22,7 +22,8 @@
         <activity android:name=".activity.Wizard1Activity" />
         <activity android:name=".activity.Wizard2Activity" />
         <activity android:name=".activity.Wizard3Activity" />
-        <activity android:name=".activity.Wizard4Activity"></activity>
+        <activity android:name=".activity.Wizard4Activity" />
+        <activity android:name=".config.PreferenciasActivity"></activity>
     </application>
 
 </manifest>

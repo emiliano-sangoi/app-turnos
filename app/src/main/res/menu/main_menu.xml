@@ -2,11 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/main_menu_item_ajustes"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/main_menu_item_ajustes_label">
+    </item>
 
     <item android:id="@+id/main_menu_item_salir"
-        android:orderInCategory="100"
+        android:orderInCategory="120"
         app:showAsAction="never"
         android:title="@string/main_menu_item_salir_label">
     </item>
+
 
 </menu>

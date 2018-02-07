@@ -1,9 +1,12 @@
 package com.example.emiliano.appturnos.backend;
 
+import android.support.annotation.NonNull;
+
 import com.example.emiliano.appturnos.backend.Especialidad;
 import com.example.emiliano.appturnos.backend.Medico;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +23,7 @@ public class Turno implements Serializable{
     private Medico medico;
     private Especialidad especialidad;
     private HorarioAtencion horarioAtencion;
+    private String fecha_cancelacion;
 
     private Integer sanatorio_id;
     private String sanatorio_nombre;
@@ -42,6 +46,25 @@ public class Turno implements Serializable{
         params.put("horario_atencion_id", Integer.toString(horarioAtencion.getIdHorarioAtencion()));
 
         return params;
+    }
+
+    /**
+     * Debuelve true si el turno ya se encuentra finalizado.
+     *
+     * @return
+     */
+    public boolean isFinalizado(){
+        Long dif = this.getHorarioAtencion().getTiempoRestanteEnMilis();
+        return dif <=0 ;
+    }
+
+    /**
+     * True si el turno fue cancelado por el usuario.
+     *
+     * @return
+     */
+    public boolean isCancelado(){
+        return this.fecha_cancelacion != null;
     }
 
     public Integer getId() {
@@ -132,6 +155,13 @@ public class Turno implements Serializable{
         this.horarioAtencion = horarioAtencion;
     }
 
+    public String getFechaCancelacion() {
+        return fecha_cancelacion;
+    }
+
+    public void setFechaCancelacion(String fechaCancelacion) {
+        this.fecha_cancelacion = fechaCancelacion;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -140,4 +170,52 @@ public class Turno implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public static Comparator<Turno> estadoCanceladoComparator = new Comparator<Turno>() {
+        @Override
+        public int compare(Turno o1, Turno o2) {
+            boolean o1IsC = o1.isCancelado();
+            boolean o2IsC = o2.isCancelado();
+
+            if( ! (o1IsC ^ o2IsC) ){
+                return 0;
+            }else if(o2IsC){
+                return 1;
+            }else{
+                return -1;
+            }
+        }
+    };
+
+    public static Comparator<Turno> estadoFinalizadoComparator = new Comparator<Turno>() {
+        @Override
+        public int compare(Turno o1, Turno o2) {
+
+            boolean o1IsF = o1.isFinalizado();
+            boolean o2IsF = o2.isFinalizado();
+
+            if( ! (o1IsF ^ o2IsF) ){
+                return 0;
+            }else if(o2IsF){
+                return 1;
+            }else{
+                return -1;
+            }
+
+        }
+    };
+
+    public static Comparator<Turno> tiempoRestanteComparator = new Comparator<Turno>() {
+        @Override
+        public int compare(Turno o1, Turno o2) {
+
+            long t1 = o1.getHorarioAtencion().getTiempoRestanteEnMilis();
+            long t2 = o2.getHorarioAtencion().getTiempoRestanteEnMilis();
+
+            return t1 > t2 ? 1 : (t1 == t2 ? 0 : -1);
+
+        }
+    };
+
+
 }

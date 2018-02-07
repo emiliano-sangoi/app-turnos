@@ -37,6 +37,9 @@ public class Medico implements Serializable {
 
     }
 
+    public String getApeNom(){
+        return apellidos + ", " + nombres;
+    }
 
     public int getIdUsuario() {
         return id_usuario;

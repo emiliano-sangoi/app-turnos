@@ -2,13 +2,13 @@
 
     <string name="app_name">AppTurnos</string>
     <string name="main_menu_item_salir_label">Salir</string>
+    <string name="main_menu_item_ajustes_label">Ajustes</string>
     <string name="home_no_existen_turnos">No existen turnos cargados.</string>
     <string name="username1">ritchie.marvin</string>
     <string name="password1">2048</string>
     <!--Usuario con mas de 1 afiliacion:-->
     <string name="username2">maxwell.moen</string>
     <string name="password2">1168</string>
-
 
 
     <string name="wTitulo">Nuevo turno</string>
@@ -39,4 +39,20 @@
     <string name="dialog_turno_titulo">Más Info</string>
     <string name="dialog_turno_tvFechaLabel_text">Fecha del turno:</string>
     <string name="dialog_turno_text_default">-</string>
+
+    <!--Visibilidad-->
+    <string name="visibilidad_solo_vig">Sólo vigentes</string>
+    <string name="visibilidad_solo_vig_code">1</string>
+    <string name="visibilidad_no_vig">No vigentes</string>
+    <string name="visibilidad_no_vig_code">2</string>
+    <string name="visibilidad_todos">Todos</string>
+    <string name="visibilidad_todos_code">3</string>
+
+    <!--Orden-->
+    <string name="orden_fecha_turno">Fecha turno</string>
+    <string name="orden_fecha_turno_code">1</string>
+    <string name="orden_cancelados">Cancelados</string>
+    <string name="orden_cancelados_code">2</string>
+    <string name="orden_finalizados">Finalizados</string>
+    <string name="orden_finalizados_code">3</string>
 </resources>

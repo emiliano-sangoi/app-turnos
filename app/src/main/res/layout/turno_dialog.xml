@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvSubtitulo"
                 android:layout_marginTop="10dp"
-                android:text="@string/dialog_turno_tvFechaLabel_text"
+                android:text="Fecha y hora:"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/txts_4"
                 android:textStyle="bold"/>
@@ -63,14 +63,40 @@
                 android:textSize="@dimen/txts_4"
                 android:textStyle="bold"/>
 
+            <!--Tiempo restante-->
+            <TextView
+                android:id="@+id/tvEstadoLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvFecha"
+                android:layout_marginTop="10dp"
+                android:text="Tiempo restante:"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/tvEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvEstadoLabel"
+                android:layout_marginTop="5sp"
+                android:text="@string/dialog_turno_text_default"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+
             <!--Clinica-->
             <TextView
                 android:id="@+id/tvClinicaLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvFecha"
+                android:layout_below="@id/tvEstado"
                 android:layout_marginTop="10dp"
-                android:text="Clinica"
+                android:text="Clinica:"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/txts_4"
                 android:textStyle="bold"/>
@@ -85,12 +111,34 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/txts_4"/>
 
+            <!--Clinica Direccion-->
+            <TextView
+                android:id="@+id/tvClinicaDirLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvClinica"
+                android:layout_marginTop="10dp"
+                android:text="Dirección:"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvClinicaDir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvClinicaDirLabel"
+                android:layout_marginTop="5sp"
+                android:text="@string/dialog_turno_text_default"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
             <!--Medico-->
             <TextView
                 android:id="@+id/tvMedicoLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvClinica"
+                android:layout_below="@id/tvClinicaDir"
                 android:layout_marginTop="10dp"
                 android:text="Médico"
                 android:textColor="@color/colorBlack"
@@ -164,7 +212,7 @@
         android:id="@+id/btnDarDeBaja"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorGray"
+        android:background="@color/colorCoral"
         android:layout_above="@+id/btnDialogCerrar"
         android:text="Dar de baja"
         android:layout_marginTop="10dp"

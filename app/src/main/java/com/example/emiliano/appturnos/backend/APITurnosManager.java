@@ -18,6 +18,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import java.util.Map;
  * http://arnab.ch/blog/2013/08/asynchronous-http-requests-in-android-using-volley/
  */
 
-public class APITurnosManager {
+public class APITurnosManager implements Serializable{
 
     private String host;
     private Integer port;
@@ -208,6 +209,42 @@ public class APITurnosManager {
         this.requestQueue.add(request);
     }
 
+    public void bajaTurno(final OnFinishCallback callback, final Integer idTurno) {
+
+        this.ultimoError = "";
+        this.setCallback(callback);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("id", idTurno.toString());
+
+        String url = new String( EP_TURNOS + "/baja");
+
+        JsonObjectRequest request = new JsonObjectRequest(url, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        JsonArray jsonArray = parseData( response.toString() );
+                        String jsonTurno = jsonArray.get(0).getAsJsonObject().toString();
+
+                        //Convertir a un objeto turno:
+                        Gson gson = new Gson();
+                        Turno turno = gson.fromJson(jsonTurno, Turno.class);
+
+                        callback.successAction(turno);
+
+                        Log.i("TURNO ANULADO: ", response.toString());
+
+                    }
+
+                },
+                defaultResponseErrorListener
+        );
+
+        this.requestQueue.add(request);
+    }
+
     public void getTurnosPorPaciente(final OnFinishCallback callback, final Integer idPaciente){
 
         String url = EP_TURNOS + "/paciente/" + idPaciente;
@@ -259,8 +296,6 @@ public class APITurnosManager {
         this.requestQueue.add(request);
 
     }
-
-
 
     public void getAfiliaciones(final OnFinishCallback callback, int id_paciente){
 
@@ -445,107 +480,12 @@ public class APITurnosManager {
 
     }
 
-//    public void fetchPacientes() {
-//
-//        StringRequest request = new StringRequest(Request.Method.GET, EP_PACIENTES, onPacientesLoaded, onPacientesError);
-//
-//        this.requestQueue.add(request);
-//
-//    }
-
 
     //CALLBACKS:
 
     //--------------------------------------------------------------------------------------------
 
-
-    public void getErrorListener(){
-
-    }
-
-    //LOGIN
-//    private Response.Listener<JSONObject> onLoginSuccess = new Response.Listener<JSONObject>() {
-//
-//        @Override
-//        public void onResponse(JSONObject response) {
-//            Gson gson = new Gson();
-//
-//            //usuario = gson.fromJson(response, Usuario.class);
-//
-//            Log.i("USUARIO: ", response.toString());
-//            //Log.i("USUARIO: ", usuario.toString());
-//        }
-//
-//
-//    };
-
-//    private Response.ErrorListener onLoginError = new Response.ErrorListener() {
-//        @Override
-//        public void onErrorResponse(VolleyError error) {
-//
-//
-//            ultimoError = error.toString();
-//            Log.e("LOGIN ERROR:", error.toString());
-//        }
-//
-//
-//    };
-
-    //--------------------------------------------------------------------------------------------
-    //PACIENTES
-//    private final Response.Listener<String> onPacientesLoaded = new Response.Listener<String>() {
-//
-//        @Override
-//        public void onResponse(String response) {
-//            Log.i("Pacientes", response);
-//
-//            Gson gson = new Gson();
-//            Usuario[] lista = gson.fromJson(response, Usuario[].class);
-//
-//            Log.i("Cantidad: ", lista.length + "");
-//        }
-//
-//    };
-
-//    private final Response.ErrorListener onPacientesError = new Response.ErrorListener() {
-//        @Override
-//        public void onErrorResponse(VolleyError error) {
-//            Log.e("Pacientes", error.toString());
-//        }
-//    };
-
-//    private final Response.ErrorListener onResponseError = new Response.ErrorListener() {
-//        @Override
-//        public void onErrorResponse(VolleyError error) {
-//            Log.e("ERROR: ", error.toString());
-//        }
-//    };
-
-
-    //--------------------------------------------------------------------------------------------
-    //MEDICOS
-
-
-
-    //Getters & Setters:
-
-//
-//    public String getHost() {
-//        return host;
-//    }
-//
-//    public void setHost(String host) {
-//        this.host = host;
-//    }
-//
-//    public Integer getPort() {
-//        return port;
-//    }
-//
-//    public void setPort(Integer port) {
-//        this.port = port;
-//    }
-
+    // Getters & Setter
 
     public String getUltimoError() {
         return ultimoError;

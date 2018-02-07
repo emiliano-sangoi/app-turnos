@@ -1,6 +1,8 @@
 package com.example.emiliano.appturnos.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.emiliano.appturnos.R;
+import com.example.emiliano.appturnos.activity.HomeActivity;
 import com.example.emiliano.appturnos.backend.Turno;
 
 import java.text.SimpleDateFormat;
@@ -61,6 +64,11 @@ public class TurnoAdapter extends ArrayAdapter<Turno> {
         simpleDateFormat = new SimpleDateFormat("HH:mm", locale);
         tvHora.setText(simpleDateFormat.format(horaIni) + " Hs.");
 
+        if(turno.isCancelado()){
+            tvTiempoRestante.setText("Cancelado");
+            tvTiempoRestante.setTextColor( context.getResources().getColor(R.color.colorInfo) );
+            return convertView;
+        }
 
         //Tiempo restante
         Long dif = turno.getHorarioAtencion().getTiempoRestanteEnMilis();
@@ -98,8 +106,14 @@ public class TurnoAdapter extends ArrayAdapter<Turno> {
 
     }
 
+
+
     @Override
     public int getCount() {
         return this.turnos.size();
+    }
+
+    private int decodificar(int id){
+        return Integer.parseInt(getContext().getResources().getString( id ));
     }
 }
