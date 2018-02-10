@@ -29,6 +29,18 @@
         android:maxWidth="@dimen/txts_4"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitulo"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:layout_above="@+id/scrollableContainer"
+        android:textSize="@dimen/txts_4" />
+
 
     <ScrollView
         android:id="@+id/scrollableContainer"
@@ -40,18 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tvSubtitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvTitulo"
-                android:layout_marginTop="10dp"
-                android:text="@string/w1Subtitulo"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/txts_4"
-                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvDescripcion"

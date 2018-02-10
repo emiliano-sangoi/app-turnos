@@ -50,6 +50,7 @@ public abstract class WizardActivity extends AppCompatActivity {
     protected TextView tvTitulo;
     protected TextView tvSubtitulo;
     protected TextView tvDescripcion;
+    protected TextView tvMsg;
     protected ProgressBar pbProgreso;
 
 
@@ -205,6 +206,8 @@ public abstract class WizardActivity extends AppCompatActivity {
         this.tvTitulo.setText( getTitulo() );
         this.tvSubtitulo = (TextView) findViewById(R.id.tvSubtitulo);
         this.tvDescripcion = (TextView) findViewById(R.id.tvDescripcion);
+        this.tvMsg = (TextView) findViewById(R.id.tvMsg);
+
         pbProgreso = (ProgressBar) findViewById(R.id.pbProgreso);
 
     }
@@ -255,6 +258,18 @@ public abstract class WizardActivity extends AppCompatActivity {
 
     public void hideProgressBar(){
         this.pbProgreso.setVisibility(View.GONE);
+    }
+
+    public void setMsg(String msg){
+        this.tvMsg.setText(msg);
+    }
+
+    public void ocultarMsg(){
+        this.tvMsg.setVisibility(TextView.GONE);
+    }
+
+    public void mostrarMsg(){
+        this.tvMsg.setVisibility(TextView.VISIBLE);
     }
 
     /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FIN GETTERS & SETTERS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */

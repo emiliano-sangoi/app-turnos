@@ -54,6 +54,7 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
         initUI();
 
         //Obtener los horarios disponibles para el medico elegido
+        showProgressBar();
         getHorariosPorMedico();
 
     }
@@ -130,27 +131,33 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
 
     public void getHorariosPorMedico(){
 
-        showProgressBar();
 
         OnFinishCallback callback = new OnFinishCallback(this) {
 
             @Override
             public void successAction(Object[] data) {
+                hideProgressBar();
+
                 //cargar el spinner con las opciones
                 horarios = (HorarioAtencion[]) data;
 
                 if(horarios.length > 0){
 
                     btnSeleccionarFechaTurno.setVisibility(Button.VISIBLE);
+                    ocultarMsg();
 
                 }else{
                     layoutHorario.setVisibility(LinearLayout.GONE);
-                    mostrarToast("El Dr. seleccionado no posee ningún turno disponible en la fecha seleccionada.");
+                    setMsg("El Dr/Dra. seleccionado no posee ningún turno disponible en la fecha seleccionada. Pruebe seleccionando otro Doctor(a)");
+                    mostrarMsg();
                 }
 
-                //Ocultar la barra de progreso:
-                hideProgressBar();
+            }
 
+            @Override
+            public void errorAction(String msg) {
+                showToast(msg);
+                hideProgressBar();
             }
         };
 
@@ -168,13 +175,6 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
     public void onClickCambiarFecha(View view){
 
         materialDatePicker();
-
-        /*
-        //Alternativa con cuadro de dialogo personalizado:
-        dialogSelFecha = new FechaPickerDialog();
-        dialogSelFecha.show(getFragmentManager(), "dialogSelFecha");
-         */
-
 
     }
 
@@ -205,15 +205,6 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
                 fechaTurnoSelTemp = null;
             }
         });
-        /*dpd.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                onDateSet(view, year, monthOfYear, dayOfMonth);
-                /*Calendar calendario = Calendar.getInstance();
-                calendario.set(year, monthOfYear-1, dayOfMonth);
-                fechaTurnoSelTemp = calendario.getTime();
-            }
-        });*/
 
         dpd.setSelectableDays( getHorariosAsCalendarArray() );
         dpd.setAccentColor( getResources().getColor(R.color.colorPrimary) );
@@ -262,17 +253,6 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
 
     }
 
-    /*public void onDismissFechaPicker(){
-
-        if(fechaTurnoSel != null){
-            btnSeleccionarHoraTurno.setVisibility(Button.GONE);
-            horarioAtencionSel = null;
-            uiActualizarFechaSel();
-            btnSeleccionarHoraTurno.setVisibility(Button.VISIBLE);
-
-        }
-
-    }*/
 
     public void onDismissHoraPicker(){
         if(dialogSelHora.getHorarioAtencionSeleccionado() != null){

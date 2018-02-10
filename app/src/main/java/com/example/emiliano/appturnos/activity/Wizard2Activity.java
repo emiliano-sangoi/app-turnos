@@ -87,8 +87,6 @@ public class Wizard2Activity extends WizardActivity {
         layoutMedicos = (LinearLayout) findViewById(R.id.layoutMedicos);
         layoutMedicos.setVisibility(LinearLayout.GONE);
 
-        pbProgreso.setVisibility(View.VISIBLE);
-
     }
 
     /**
@@ -96,12 +94,15 @@ public class Wizard2Activity extends WizardActivity {
      */
     private void getEspecialidades() {
 
-        pbProgreso.setVisibility(View.VISIBLE);
+        showProgressBar();
 
         OnFinishCallback callback = new OnFinishCallback(this) {
 
             @Override
             public void successAction(Object[] data) {
+
+                hideProgressBar();
+
                 //cargar el spinner con las opciones
                 especialidades = (Especialidad[]) data;
 
@@ -140,9 +141,12 @@ public class Wizard2Activity extends WizardActivity {
                     }
                 }
 
-                //Ocultar la barra de progreso:
-                pbProgreso.setVisibility(View.GONE);
+            }
 
+            @Override
+            public void errorAction(String msg) {
+                showToast(msg);
+                hideProgressBar();
             }
         };
 
@@ -155,12 +159,15 @@ public class Wizard2Activity extends WizardActivity {
      */
     private void getMedicosConEspecialidad(){
 
-        pbProgreso.setVisibility(ProgressBar.VISIBLE);
+        showProgressBar();
 
         OnFinishCallback callback = new OnFinishCallback(this){
 
             @Override
             public void successAction(Object[] data) {
+
+                hideProgressBar();
+
                 //cargar el spinner con las opciones
                 medicos = (Medico[]) data;
 
@@ -202,37 +209,18 @@ public class Wizard2Activity extends WizardActivity {
                     mostrarToast("No se encontro ningún médico disponible para la especialidad: " + especialidadSel.getNomEspecialidad());
                 }
 
-                //Ocultar la barra de progreso:
-                pbProgreso.setVisibility(View.GONE);
+            }
 
+            @Override
+            public void errorAction(String msg) {
+                hideProgressBar();
+                showToast(msg);
             }
         };
 
         this.apiTurnos.getMedicos(callback, especialidadSel.getIdEspecialidad());
 
     }
-
-    /**
-     * Actualiza la vista con la especialidad seleccionada.
-     */
-    /*public void setEspSeleccionada(){
-        //setear el item seleccionado:
-        if(turno.getEspecialidad() != null){
-
-            for(int i=0; i<especialidades.length; i++){
-                if(especialidades[i].getIdEspecialidad().equals(turno.getEspecialidad().getIdEspecialidad())){
-                    this.spinner.setSelection(this.spinnerAdapter.getPosition(especialidades[i]));
-                    break;
-                }
-            }
-
-        }else{
-            if(especialidades.length > 0){
-                this.spinner.setSelection(this.spinnerAdapter.getPosition(especialidades[0]));
-            }
-
-        }
-    }*/
 
     public Integer getPosEspecialidadEnSpinner(int idEsp){
         Integer res = null;

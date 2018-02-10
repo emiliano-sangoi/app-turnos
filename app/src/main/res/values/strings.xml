@@ -3,6 +3,7 @@
     <string name="app_name">AppTurnos</string>
     <string name="main_menu_item_salir_label">Salir</string>
     <string name="main_menu_item_ajustes_label">Ajustes</string>
+    <string name="main_menu_item_acerca_de_label">Acerca de ...</string>
     <string name="home_no_existen_turnos">No existen turnos cargados.</string>
     <string name="username1">ritchie.marvin</string>
     <string name="password1">2048</string>
@@ -39,6 +40,19 @@
     <string name="dialog_turno_titulo">Más Info</string>
     <string name="dialog_turno_tvFechaLabel_text">Fecha del turno:</string>
     <string name="dialog_turno_text_default">-</string>
+
+    <!--Dialog Acerca de... -->
+    <string name="dialog_acerca_de_titulo">Acerca de...</string>
+    <string name="dialog_acerca_de_autor_label">Autor:</string>
+    <string name="dialog_acerca_de_autor">Emiliano Sangoi</string>
+    <string name="dialog_acerca_de_desc_label">Descripción:</string>
+    <string name="dialog_acerca_de_desc">Aplicación desarrollada para el curso de Aplicaciones Móviles dictador por el laboratorio Gugler de la Facultad de Ciencia y Tecnología (U.A.D.E.R). </string>
+    <string name="dialog_acerca_de_licencia_label">Licencia:</string>
+    <string name="dialog_acerca_de_licencia">GPL</string>
+    <string name="dialog_acerca_de_repo_label">Repositorio GIT:</string>
+    <string name="dialog_acerca_de_repo_link">
+        &lt;a href=https://github.com/emiliano-sangoi/app-turnos>Repo en Github&lt;/a>
+    </string>
 
     <!--Visibilidad-->
     <string name="visibilidad_solo_vig">Sólo vigentes</string>

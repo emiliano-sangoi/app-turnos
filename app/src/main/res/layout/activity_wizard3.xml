@@ -28,7 +28,18 @@ tools:context="com.example.emiliano.appturnos.activity.Wizard3Activity">
     android:maxHeight="@dimen/txts_4"
     android:maxWidth="@dimen/txts_4"
     android:visibility="gone"
-    android:layout_above="@+id/w3TxtSubTitulo" />
+     />
+
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitulo"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txts_4" />
 
     <ScrollView
         android:id="@+id/scrollableContainer"
@@ -44,23 +55,12 @@ tools:context="com.example.emiliano.appturnos.activity.Wizard3Activity">
             android:orientation="vertical"
             android:layout_below="@+id/tvSubtitulo">
 
-            <TextView
-                android:id="@+id/tvSubtitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvTitulo"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:text="@string/w3Subtitulo"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/txts_4" />
-
 
             <TextView
                 android:id="@+id/tvDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSubtitulo"
+                android:layout_below="@+id/tvMsg"
                 android:layout_marginTop="10dp"
                 android:text="@string/w3Desc"
                 android:textSize="@dimen/txts_default" />

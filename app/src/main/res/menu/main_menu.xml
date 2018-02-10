@@ -8,6 +8,12 @@
         android:title="@string/main_menu_item_ajustes_label">
     </item>
 
+    <item android:id="@+id/main_menu_item_acerca_de"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/main_menu_item_acerca_de_label">
+    </item>
+
     <item android:id="@+id/main_menu_item_salir"
         android:orderInCategory="120"
         app:showAsAction="never"

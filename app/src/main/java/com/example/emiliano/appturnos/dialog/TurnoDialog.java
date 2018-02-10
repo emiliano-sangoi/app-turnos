@@ -223,22 +223,7 @@ public class TurnoDialog extends DialogFragment {
             }
         });
 
-        //accion para borrar:
-//        this.btnBorrar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if( borrar == false ){
-//                    btnBorrar.setText("CONFIRMAR");
-//                    String msg = "Presione nuevamente para confirmar el borrado";
-//                    Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-//                    borrar = true;
-//                }else{
-//                    op = OP_BORRAR;
-//                    getDialog().dismiss();
-//                }
-//            }
-//        });
-//
+
         //accion para cerrar:
         this.btnCerrar.setOnClickListener(new View.OnClickListener() {
             @Override

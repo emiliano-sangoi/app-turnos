@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15sp">
+
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/dialog_acerca_de_titulo"
+        android:textAlignment="center"
+        android:textSize="@dimen/txts_titulo"
+        android:textStyle="bold" />
+
+
+    <View
+        android:id="@+id/linea"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/titulo"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:background="@color/colorBlack" />
+
+    <ScrollView
+        android:id="@+id/scrollableContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:layout_below="@+id/linea">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Autor-->
+            <TextView
+                android:id="@+id/tvAutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSubtitulo"
+                android:layout_marginTop="10dp"
+                android:text="@string/dialog_acerca_de_autor_label"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/tvAutorLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAutor"
+                android:layout_marginTop="5sp"
+                android:text="@string/dialog_acerca_de_autor"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <!--Tiempo restante-->
+            <TextView
+                android:id="@+id/tvDescLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAutorLabel"
+                android:layout_marginTop="10dp"
+                android:text="@string/dialog_acerca_de_desc_label"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDescLabel"
+                android:layout_marginTop="5sp"
+                android:text="@string/dialog_acerca_de_desc"
+                android:textColor="@color/colorGray2"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvLicenciaLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDesc"
+                android:layout_marginTop="10dp"
+                android:text="@string/dialog_acerca_de_licencia_label"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvLicencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLicenciaLabel"
+                android:layout_marginTop="5sp"
+                android:textAlignment="center"
+                android:text="@string/dialog_acerca_de_licencia"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
+            <TextView
+                android:id="@+id/tvRepoLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLicencia"
+                android:layout_marginTop="10dp"
+                android:text="@string/dialog_acerca_de_repo_label"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvRepo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRepoLabel"
+                android:layout_marginTop="5sp"
+                android:clickable="true"
+                android:linksClickable="true"
+                android:textAlignment="center"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txts_4"/>
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+    <Button
+        android:id="@+id/btnDialogCerrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:layout_alignParentBottom="true"
+        android:text="Cerrar"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txts_5" />
+
+
+
+
+</RelativeLayout>

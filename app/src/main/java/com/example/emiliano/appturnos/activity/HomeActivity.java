@@ -28,6 +28,7 @@ import com.example.emiliano.appturnos.backend.APITurnosManager;
 import com.example.emiliano.appturnos.backend.Turno;
 import com.example.emiliano.appturnos.backend.Usuario;
 import com.example.emiliano.appturnos.config.PreferenciasActivity;
+import com.example.emiliano.appturnos.dialog.AcercaDeDialog;
 import com.example.emiliano.appturnos.dialog.TurnoDialog;
 import com.example.emiliano.appturnos.event.OnFinishCallback;
 
@@ -273,6 +274,10 @@ public class HomeActivity extends AppCompatActivity implements DialogInterface.O
             case R.id.main_menu_item_salir:
                 usuario.setLogueado(false);
                 startActivity( new Intent(this, LoginActivity.class) );
+                break;
+            case R.id.main_menu_item_acerca_de:
+                AcercaDeDialog acercaDeDialog = new AcercaDeDialog();
+                acercaDeDialog.show( getFragmentManager(), "AcercaDeDialog");
                 break;
             case R.id.main_menu_item_ajustes:
                 Intent i = new Intent(this, PreferenciasActivity.class);

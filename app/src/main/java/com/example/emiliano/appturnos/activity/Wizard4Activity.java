@@ -20,6 +20,7 @@ public class Wizard4Activity extends WizardActivity {
     private TextView tvEspecialidad;
     private TextView tvAfiliacion;
     private TextView tvClinica;
+    private TextView tvClinicaDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class Wizard4Activity extends WizardActivity {
         tvEspecialidad = (TextView) findViewById(R.id.tvEspecialidad);
         tvAfiliacion = (TextView) findViewById(R.id.tvAfiliacion);
         tvClinica = (TextView) findViewById(R.id.tvClinica);
+        tvClinicaDir = (TextView) findViewById(R.id.tvClinicaDir);
 
         hideProgressBar();
 
@@ -53,13 +55,14 @@ public class Wizard4Activity extends WizardActivity {
     @Override
     public void onClickBtnFinalizar(View view) {
 
+        showProgressBar();
 
         final Context self = this;
         OnFinishCallback onFinishCallback = new OnFinishCallback(this){
 
             @Override
             public void successAction(Object data) {
-                super.successAction(data);
+
                 hideProgressBar();
 
                 showToast("Registro creado!!!");
@@ -77,7 +80,7 @@ public class Wizard4Activity extends WizardActivity {
             }
         };
 
-        showProgressBar();
+
         this.apiTurnos.nuevoTurno(onFinishCallback, this.turno);
 
     }
@@ -104,6 +107,13 @@ public class Wizard4Activity extends WizardActivity {
             //tvClinica.setText( turno.getSanatorioNombre() + " - " + turno.getSanatorioDireccion() );
         }
 
+        //Clinica
+        if(turno.getHorarioAtencion() != null){
+            //tvClinica.setText( turno.getSanatorioNombre() + " - " + turno.getSanatorioDireccion() );
+            this.tvClinica.setText(turno.getHorarioAtencion().getSanatorioNombre());
+            this.tvClinicaDir.setText(turno.getHorarioAtencion().getSanatorioDireccion());
+        }
+
         //medico del turno
         if(turno.getMedico() != null){
             tvMedico.setText( turno.getMedico().toString() );
@@ -118,7 +128,8 @@ public class Wizard4Activity extends WizardActivity {
         if(turno.getAfiliacion() != null){
             tvAfiliacion.setText( turno.getAfiliacion().getNombre() );
         }else{
-            tvAfiliacion.setText( "Particular ($250) " );
+            //En el caso de no haber elegido ninguna obra social
+            tvAfiliacion.setText( "Ninguna. Abona consulta ($250) " );
         }
 
     }
