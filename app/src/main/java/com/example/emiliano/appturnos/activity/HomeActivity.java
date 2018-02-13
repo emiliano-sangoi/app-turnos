@@ -242,8 +242,9 @@ public class HomeActivity extends AppCompatActivity implements DialogInterface.O
             switch (resultCode) {
                 case WizardActivity.RESULT_OK:
                     break;
-                case WizardActivity.RESULT_CREATED:
+                case WizardActivity.TURNO_CREADO:
                     Toast.makeText(this, "Turno creado correctamente!!!", Toast.LENGTH_LONG).show();
+                    getTurnos();
                     break;
                 case WizardActivity.RESULT_CANCELED:
                     Toast.makeText(this, "La creacion del turno ha sido cancelada.", Toast.LENGTH_LONG).show();
@@ -251,10 +252,8 @@ public class HomeActivity extends AppCompatActivity implements DialogInterface.O
         }else if(requestCode == UPD_AJUSTES){
 
             if(resultCode == RESULT_OK){
-
                 actualizarListadoTurnos();
             }
-
 
         }
 

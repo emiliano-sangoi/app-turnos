@@ -136,7 +136,7 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
 
             @Override
             public void successAction(Object[] data) {
-                hideProgressBar();
+
 
                 //cargar el spinner con las opciones
                 horarios = (HorarioAtencion[]) data;
@@ -151,6 +151,8 @@ public class Wizard3Activity extends WizardActivity implements DialogInterface.O
                     setMsg("El Dr/Dra. seleccionado no posee ningún turno disponible en la fecha seleccionada. Pruebe seleccionando otro Doctor(a)");
                     mostrarMsg();
                 }
+
+                hideProgressBar();
 
             }
 

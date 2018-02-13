@@ -1,6 +1,7 @@
 package com.example.emiliano.appturnos.backend;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +44,7 @@ public class APITurnosManager implements Serializable{
 
     private String host;
     private Integer port;
+    private String basePath;
 
     private String EP_PACIENTES;
     private String EP_LOGIN;
@@ -72,8 +77,14 @@ public class APITurnosManager implements Serializable{
         this.ultimoError = new String();
 
         //Parametros de configuracion:
-        this.host = "192.168.1.104";
-        this.port = 8080;
+        //localhost:
+        //this.host = "192.168.1.104";
+        //this.port = 8080;
+
+        //Prod:
+        this.host = "www.emiliano-sangoi.com.ar";
+        this.port = 80;
+        this.basePath = "api-turnos/api/index.php";
 
         //URLs:
         EP_PACIENTES = this.getBaseUrl() + "/pacientes";
@@ -153,7 +164,10 @@ public class APITurnosManager implements Serializable{
                         try{
                             switch (error.networkResponse.statusCode) {
                                 case 401: //unauthorized
-                                    callback.showToast("Usuario y/o contraseña incorrectos");
+                                    callback.errorAction("Usuario y/o contraseña incorrectos");
+                                    break;
+                                case 403: //unauthorized
+                                    callback.errorAction("Usuario y/o contraseña incorrectos");
                                     break;
                                 default:
                                     callback.showToast("Ocurrio un error desde la API.");
@@ -510,6 +524,17 @@ public class APITurnosManager implements Serializable{
                   php -S 192.168.0.61:8080
         */
     public String getBaseUrl(){
-        return "http://" + this.host + ":" + this.port + "/api";
+        return "http://" + this.host + ":" + this.port + "/" + this.basePath;
+    }
+
+    // convert from UTF-8 -> internal Java String format
+    public static String convertFromUTF8(String s) {
+        String out = null;
+        try {
+            out = new String(s.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return out;
     }
 }

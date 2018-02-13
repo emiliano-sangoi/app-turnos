@@ -29,7 +29,6 @@ tools:context="com.example.emiliano.appturnos.activity.LoginActivity">
     android:background="@drawable/borde_negro"
     android:inputType="textPersonName"
     android:padding="12dp"
-    android:selectAllOnFocus="false"
     android:text="@string/username2"
     android:textSize="@dimen/txts_default" />
 

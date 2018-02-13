@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by emiliano on 13/07/17.
  */
 
-public class Especialidad implements Serializable{
+public class Especialidad implements Serializable {
 
     private Integer id_especialidad;
 
@@ -27,7 +27,6 @@ public class Especialidad implements Serializable{
     }
 
 
-
     public Integer getIdEspecialidad() {
         return id_especialidad;
     }
@@ -36,11 +35,22 @@ public class Especialidad implements Serializable{
         this.id_especialidad = id_especialidad;
     }
 
+
     public String getNomEspecialidad() {
-        return nom_especialidad;
+        /*
+            La api devuelve los nombres codificados en UTF-8 Y Java internamente usa UTF-16 (ISO-8859-1),
+            por esta razon se los debe convertir.
+         */
+        String out = null;
+        try {
+            out = new String(nom_especialidad.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return "";
+        }
+        return out;
     }
 
-    public void setNom_especialidad(String nom_especialidad) {
+    public void setNomEspecialidad(String nom_especialidad) {
         this.nom_especialidad = nom_especialidad;
     }
 
@@ -56,8 +66,6 @@ public class Especialidad implements Serializable{
     public String toString() {
         return this.getNomEspecialidad().toUpperCase();
     }
-
-
 
 
 }

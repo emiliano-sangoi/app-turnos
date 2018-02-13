@@ -57,19 +57,13 @@ public class Wizard4Activity extends WizardActivity {
 
         showProgressBar();
 
-        final Context self = this;
         OnFinishCallback onFinishCallback = new OnFinishCallback(this){
 
             @Override
             public void successAction(Object data) {
 
                 hideProgressBar();
-
-                showToast("Registro creado!!!");
-
-                //Redireccionar al listado...
-                Intent intent = new Intent(self, HomeActivity.class);
-                startActivity(intent);
+                finalizar(TURNO_CREADO);
 
             }
 

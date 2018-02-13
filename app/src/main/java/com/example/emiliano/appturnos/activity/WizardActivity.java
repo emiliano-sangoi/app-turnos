@@ -29,7 +29,7 @@ public abstract class WizardActivity extends AppCompatActivity {
     public static final int REQUEST_W2 = 2;
     public static final int REQUEST_W3 = 3;
     public static final int REQUEST_W4 = 4;
-    public static final int RESULT_CREATED = 10;
+    public static final int TURNO_CREADO = 10;
 
     //Atributos
     protected Turno turno;
@@ -147,8 +147,8 @@ public abstract class WizardActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         switch (resultCode){
-            case RESULT_CREATED:
-                finalizar(RESULT_CREATED);
+            case TURNO_CREADO:
+                finalizar(TURNO_CREADO);
                 break;
             case RESULT_OK:
                 //Actualizar turno:
@@ -221,7 +221,7 @@ public abstract class WizardActivity extends AppCompatActivity {
     }
 
     public void onClickBtnFinalizar(View view){
-        finalizar(RESULT_CREATED);
+        finalizar(TURNO_CREADO);
     }
 
     public void onClickBotonCancelar(View view){

@@ -8,8 +8,10 @@
     <string name="username1">ritchie.marvin</string>
     <string name="password1">2048</string>
     <!--Usuario con mas de 1 afiliacion:-->
-    <string name="username2">maxwell.moen</string>
-    <string name="password2">1168</string>
+    <!--<string name="username2">maxwell.moen</string>-->
+    <string name="username2"></string>
+    <!--<string name="password2">1168</string>-->
+    <string name="password2"></string>
 
 
     <string name="wTitulo">Nuevo turno</string>

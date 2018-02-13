@@ -13,6 +13,8 @@ import com.example.emiliano.appturnos.event.OnFinishCallback;
 import com.example.emiliano.appturnos.R;
 import com.example.emiliano.appturnos.backend.Usuario;
 import com.example.emiliano.appturnos.backend.APITurnosManager;
+import com.example.emiliano.appturnos.validaciones.PasswordWatcher;
+import com.example.emiliano.appturnos.validaciones.UsuarioWatcher;
 
 public class LoginActivity extends Activity {
 
@@ -32,7 +34,9 @@ public class LoginActivity extends Activity {
         this.apiTurnos = new APITurnosManager(rq);
 
         etUsername = (EditText) findViewById(R.id.etUsername);
+        etUsername.addTextChangedListener(new UsuarioWatcher(etUsername));
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etPassword.addTextChangedListener(new PasswordWatcher(etPassword));
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
 
         //api.fetchPacientes();
@@ -57,6 +61,11 @@ public class LoginActivity extends Activity {
 
                 startActivity(i);
 
+            }
+
+            @Override
+            public void errorAction(String msg) {
+                showToast(msg);
             }
         };
 
