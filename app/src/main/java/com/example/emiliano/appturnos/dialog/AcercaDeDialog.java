@@ -26,7 +26,7 @@ public class AcercaDeDialog extends DialogFragment{
         this.tvRepo = (TextView) view.findViewById(R.id.tvRepo);
         this.tvRepo.setMovementMethod(LinkMovementMethod.getInstance());
         this.tvRepo.setClickable(true);
-        String text = getActivity().getResources().getString(R.string.dialog_acerca_de_repo_link);
+        String text = getActivity().getResources().getString(R.string.repo_github_link);
         this.tvRepo.setText(Html.fromHtml(text));
 
     }

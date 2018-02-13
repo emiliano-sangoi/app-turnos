@@ -52,7 +52,7 @@
     <string name="dialog_acerca_de_licencia_label">Licencia:</string>
     <string name="dialog_acerca_de_licencia">GPL</string>
     <string name="dialog_acerca_de_repo_label">Repositorio GIT:</string>
-    <string name="dialog_acerca_de_repo_link">
+    <string name="repo_github_link">
         &lt;a href=https://github.com/emiliano-sangoi/app-turnos>Repo en Github&lt;/a>
     </string>
 

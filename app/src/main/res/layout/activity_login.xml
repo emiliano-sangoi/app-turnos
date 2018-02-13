@@ -55,6 +55,19 @@ tools:context="com.example.emiliano.appturnos.activity.LoginActivity">
     android:text="@string/password2"
     android:textSize="@dimen/txts_default" />
 
+    <TextView
+        android:id="@+id/txtGithub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnIngresar"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/txts_default"
+        android:textAlignment="center"
+        android:clickable="true"
+        android:linksClickable="true"
+        android:text="Github" />
+
 <Button
     android:id="@+id/btnIngresar"
     android:layout_width="match_parent"
